@@ -23,7 +23,8 @@ const config: Config = {
           200: "#D9D9D9",
           300: "#656565",
         },
-        hover: "#178AF4",
+        hover: "#14A7E6",
+        kakao: "#fbe300",
         font: {
           gray100: "#646F7C",
           gray200: "#808080",
@@ -51,6 +52,9 @@ const config: Config = {
       width: {
         "10": "10rem",
         "25": "25rem",
+      },
+      margin: {
+        center: "0 auto",
       },
     },
   },

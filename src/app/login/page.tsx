@@ -18,7 +18,7 @@ export default function KakaoLogin() {
           <span>간편하게 로그인 하고</span>
           <span className=" font-extraBold">다양한 서비스를 즐기세요.</span>
         </div>
-        <div className="flex justify-center items-center w-5/6 h-11 rounded-full bg-kakao mt-6">
+        <div className="flex justify-center items-center w-5/6 h-11 rounded-full bg-kakao mt-6 cursor-grab">
           <Image src={kakaoIcon} alt="kakaoIcon" className=" w-7 mr-3" />
           <span>카카오톡으로 시작</span>
         </div>

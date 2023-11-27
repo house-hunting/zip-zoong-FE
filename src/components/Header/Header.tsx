@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Logo from "/public/집중 메인로고.png";
 import ProfileImg from "/public/기본 프로필 이미지.png";
+import { FaMagnifyingGlass } from "react-icons/fa6";
 
 export const Header = () => {
   return (
@@ -22,8 +23,14 @@ export const Header = () => {
           </li>
         </ul>
       </div>
-      <div>
-        <input className="w-25 bg-gray-300" placeholder="원하는 지역명, 지하철역을 입력해주세요" />
+      <div className="flex items-center">
+        <input
+          className=" w-80 border h-auto p-2 border-gray-200 rounded-s-md"
+          placeholder="원하는 지역명, 지하철역을 입력해주세요"
+        />
+        <button className=" bg-primary-200 p-2 rounded-e-md">
+          <FaMagnifyingGlass color={"white"} size={25} />
+        </button>
       </div>
       <div className="flex items-center">
         <Image className="w-11" src={ProfileImg} alt="Profile" />

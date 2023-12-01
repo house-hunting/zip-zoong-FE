@@ -9,36 +9,36 @@ import Image from "next/image";
 
 export const Contents = () => {
   return (
-    <div>
-      <div>1.5형 분리형 공간 넓은 잠실 풀옵션 분리형 원룸</div>
-      <div>
-        <div>
-          <Image src={roomWidth} alt="roomWidth" />
-          <span>7평</span>
+    <div className="py-5 border-b border-gray-200">
+      <div className="text-md my-2">1.5형 분리형 공간 넓은 잠실 풀옵션 분리형 원룸</div>
+      <div className="py-4">
+        <div className="flex items-center my-5">
+          <Image className="w-12 mr-7" src={roomWidth} alt="roomWidth" />
+          <span className="font-bold">7평</span>
         </div>
-        <div>
-          <Image src={room} alt="room" />
-          <span>분리형 원룸</span>
+        <div className="flex items-center my-5">
+          <Image className="w-12 mr-7" src={room} alt="room" />
+          <span className="font-bold">분리형 원룸</span>
         </div>
-        <div>
-          <Image src={floor} alt="floor" />
-          <span>5층</span>
+        <div className="flex items-center my-5">
+          <Image className="w-12 mr-7" src={floor} alt="floor" />
+          <span className="font-bold">5층</span>
         </div>
-        <div>
-          <Image src={parking} alt="parking" />
-          <span>주차 불가능</span>
+        <div className="flex items-center my-5">
+          <Image className="w-12 mr-7" src={parking} alt="parking" />
+          <span className="font-bold">주차 불가능</span>
         </div>
-        <div>
-          <Image src={calendar} alt="calendar" />
-          <span>0000.00.00 이후 입주가능</span>
+        <div className="flex items-center my-5">
+          <Image className="w-12 mr-7" src={calendar} alt="calendar" />
+          <span className="font-bold">0000.00.00 이후 입주가능</span>
         </div>
-        <div>
-          <Image src={direction} alt="direction" />
-          <span>남서향</span>
+        <div className="flex items-center my-5">
+          <Image className="w-12 mr-7" src={direction} alt="direction" />
+          <span className="font-bold">남서향</span>
         </div>
-        <div>
-          <Image src={elevator} alt="elevator" />
-          <span>엘리베이터 있음</span>
+        <div className="flex items-center my-5">
+          <Image className="w-12 mr-7" src={elevator} alt="elevator" />
+          <span className="font-bold">엘리베이터 있음</span>
         </div>
       </div>
     </div>

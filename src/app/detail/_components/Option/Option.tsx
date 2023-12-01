@@ -8,31 +8,33 @@ import desk from "/public/집중 책상.png";
 
 export const Option = () => {
   return (
-    <div>
-      <div>옵션 정보</div>
-      <div>
-        <Image src={closet} alt="closet" />
-        <span>옷장</span>
-      </div>
-      <div>
-        <Image src={refrigerator} alt="refrigerator" />
-        <span>냉장고</span>
-      </div>
-      <div>
-        <Image src={airConditioner} alt="airConditioner" />
-        <span>에어컨</span>
-      </div>
-      <div>
-        <Image src={washing} alt="washing" />
-        <span>세탁기</span>
-      </div>
-      <div>
-        <Image src={oven} alt="oven" />
-        <span>전자레인지</span>
-      </div>
-      <div>
-        <Image src={desk} alt="desk" />
-        <span>책상</span>
+    <div className="pb-14 border-b border-gray-200">
+      <div className="font-bold text-lg my-7">옵션 정보</div>
+      <div className="flex justify-around">
+        <div className="flex justify-between items-center flex-col">
+          <Image className="w-14" src={closet} alt="closet" />
+          <span className="mt-5 font-semibold">옷장</span>
+        </div>
+        <div className="flex justify-between items-center flex-col">
+          <Image className="w-14" src={refrigerator} alt="refrigerator" />
+          <span className="mt-5 font-semibold">냉장고</span>
+        </div>
+        <div className="flex justify-between items-center flex-col">
+          <Image className="w-14 mt-7" src={airConditioner} alt="airConditioner" />
+          <span className="mt-5 font-semibold">에어컨</span>
+        </div>
+        <div className="flex justify-between items-center flex-col">
+          <Image className="w-14" src={washing} alt="washing" />
+          <span className="mt-5 font-semibold">세탁기</span>
+        </div>
+        <div className="flex justify-between items-center flex-col">
+          <Image className="w-14 mt-6" src={oven} alt="oven" />
+          <span className="mt-5 font-semibold">전자레인지</span>
+        </div>
+        <div className="flex justify-between items-center flex-col">
+          <Image className="w-14 mt-6" src={desk} alt="desk" />
+          <span className="mt-5 font-semibold">책상</span>
+        </div>
       </div>
     </div>
   );

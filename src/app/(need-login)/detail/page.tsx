@@ -2,8 +2,7 @@ import { Header } from "@/components/Header/Header";
 import { Heart } from "@/components/Heart/Heart";
 import Image from "next/image";
 import roomImg from "/public/집중 배너.jpeg";
-import { Contents } from "./_components/Contents/Contents";
-import { Option } from "./_components/Option/Option";
+import { Contents, Option } from "./_components";
 
 export default function Detail() {
   return (

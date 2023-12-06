@@ -22,7 +22,7 @@ export default function ProfileEdit() {
       <div className="flex justify-center items-center flex-col w-3/2">
         <div className="p-10 relative">
           <Image className=" w-48" src={ProfileImg} alt="profileImg" />
-          <div className="bg-primary-200 flex justify-center items-center w-9 h-9 rounded-full absolute bottom-12 right-12 bot">
+          <div className="bg-primary-200 flex justify-center items-center w-9 h-9 rounded-full absolute bottom-12 right-12 bot cursor-pointer">
             <FaCamera color={"white"} onClick={handleClick} />
             <input
               className=" hidden"

@@ -1,6 +1,6 @@
 export default function UploadFile() {
   return (
-    <div className="border grid grid-cols-6 justify-between">
+    <div className="border-y border-b-black grid grid-cols-6 justify-between">
       <div className="flex justify-center items-center border">
         <div>사진 등록</div>
       </div>

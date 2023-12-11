@@ -14,7 +14,7 @@ import {
 export default function RegiOption() {
   return (
     <>
-      <div className="border grid grid-cols-6 justify-between">
+      <div className="grid grid-cols-6 justify-between">
         <div className="flex justify-center items-center border">
           <div>입주 가능 일자</div>
         </div>
@@ -35,7 +35,7 @@ export default function RegiOption() {
         </div>
       </div>
       {/*  */}
-      <div className="border grid grid-cols-6 justify-between">
+      <div className="border-t grid grid-cols-6 justify-between">
         <div className="flex justify-center items-center border">
           <div>층 수</div>
         </div>
@@ -94,7 +94,7 @@ export default function RegiOption() {
         </div>
       </div>
       {/*  */}
-      <div className="grid grid-cols-6 justify-between outline-gray ">
+      <div className="border-y border-b-black grid grid-cols-6 justify-between">
         <div className="flex justify-center items-center border ">
           <div>추가 정보</div>
         </div>

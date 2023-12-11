@@ -32,9 +32,14 @@ export const Header = () => {
           <FaMagnifyingGlass color={"white"} size={25} />
         </button>
       </div>
-      <div className="flex items-center">
+      {/* <div className="flex items-center">
         <Image className="w-11" src={ProfileImg} alt="Profile" />
         <span className="ml-3 font-semibold">ㅇㅇㅇ님</span>
+      </div> */}
+      <div className="flex items-center">
+        <div className="flex items-center bg-primary-200 h-10 p-5 rounded-md text-white text-sm cursor-pointer hover:bg-hover">
+          로그인 및 회원가입
+        </div>
       </div>
     </div>
   );

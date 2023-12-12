@@ -16,7 +16,7 @@ export default function RegiOption() {
     <>
       <div className="grid grid-cols-6 justify-between">
         <div className="flex justify-center items-center border">
-          <div>입주 가능 일자</div>
+          <div className="font-bold">입주 가능 일자</div>
         </div>
         <div className="col-span-2 p-3">
           <RadioGroup className="flex items-center col-span-3 h-16 mx-3" defaultValue="comfortable">
@@ -37,7 +37,7 @@ export default function RegiOption() {
       {/*  */}
       <div className="border-t grid grid-cols-6 justify-between">
         <div className="flex justify-center items-center border">
-          <div>층 수</div>
+          <div className="font-bold">층 수</div>
         </div>
         <div className="col-span-3 p-3">
           <div className="flex">
@@ -96,7 +96,7 @@ export default function RegiOption() {
       {/*  */}
       <div className="border-y border-b-black grid grid-cols-6 justify-between">
         <div className="flex justify-center items-center border ">
-          <div>추가 정보</div>
+          <div className="font-bold">추가 정보</div>
         </div>
         <div className="w-full col-start-2 col-end-7">
           <div className="grid p-3">

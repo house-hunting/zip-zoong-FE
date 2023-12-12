@@ -21,7 +21,7 @@ export default function Register() {
           <div className="flex flex-col w-full">
             <div className="grid grid-cols-6 justify-between">
               <div className="flex justify-center items-center border ">
-                <div>매물 유형</div>
+                <div className="font-bold">매물 유형</div>
               </div>
               <RadioGroup
                 className="flex justify-around items-center col-span-5 h-16"
@@ -40,7 +40,7 @@ export default function Register() {
             {/*  */}
             <div className="border-t grid grid-cols-6 justify-between">
               <div className="flex justify-center items-center border">
-                <div>매물 주소</div>
+                <div className="font-bold">매물 주소</div>
               </div>
               <div className="col-span-3 p-3">
                 <span className="font-semibold">주소 검색</span>
@@ -60,7 +60,7 @@ export default function Register() {
             {/*  */}
             <div className="border-y grid grid-cols-6 justify-between border-b-black">
               <div className="flex justify-center items-center border">
-                <div>방 정보</div>
+                <div className="font-bold">방 정보</div>
               </div>
               <div className="flex items-center justify-between col-span-5 p-3">
                 <div>
@@ -92,7 +92,7 @@ export default function Register() {
             {/*  */}
             <div className="grid grid-cols-6 justify-between outline-gray ">
               <div className="flex justify-center items-center border ">
-                <div>거래 종류</div>
+                <div className="font-bold">거래 종류</div>
               </div>
               <RadioGroup
                 className="flex items-center col-span-3 h-16 mx-3"
@@ -111,7 +111,7 @@ export default function Register() {
             {/*  */}
             <div className="border-y grid grid-cols-6 justify-between border-b-black">
               <div className="flex justify-center items-center border">
-                <div>가격 정보</div>
+                <div className="font-bold">가격 정보</div>
               </div>
               <div className="col-span-3 p-3">
                 <div className="flex">
@@ -160,7 +160,7 @@ export default function Register() {
             {/*  */}
             <div className="grid grid-cols-6 justify-between">
               <div className="flex justify-center items-center border">
-                <div>상세 설명</div>
+                <div className="font-semibold">상세 설명</div>
               </div>
               <div className="col-span-5 p-3">
                 <span className="font-semibold">제목</span>
@@ -170,6 +170,7 @@ export default function Register() {
                     placeholder="리스트에 노출되는 문구입니다. 40자 이내로 작성해 주세요."
                   />
                 </div>
+                <span className="font-semibold">내용</span>
                 <textarea
                   className="w-full border rounded-md p-3 h-60"
                   placeholder="매물 상세 페이지에 노출되는 문구입니다. 1000자 이내로 작성해 주세요."
@@ -179,7 +180,6 @@ export default function Register() {
             {/*  */}
           </div>
         </div>
-
         <button className="mt-5 bg-primary-200 text-white w-48 h-12 rounded-md font-semibold hover:bg-hover">
           매물 등록
         </button>

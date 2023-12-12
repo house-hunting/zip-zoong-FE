@@ -2,25 +2,44 @@ import Image from "next/image";
 import Logo from "/public/집중 메인로고.png";
 import ProfileImg from "/public/기본 프로필 이미지.png";
 import { FaMagnifyingGlass } from "react-icons/fa6";
+import Link from "next/link";
+
+const nav = [
+  {
+    title: "원룸",
+    subTitle: "전월세",
+    address: "/",
+  },
+  {
+    title: "투룸",
+    subTitle: "전월세",
+    address: "/",
+  },
+  {
+    title: "내집 내놓기",
+    subTitle: "방 직거래",
+    address: "/register",
+  },
+];
 
 export const Header = () => {
   return (
     <div className="flex justify-between py-3 px-16">
       <div className="flex">
-        <Image className="w-36" src={Logo} alt="Logo" />
+        <Link href={"/"}>
+          <Image className="w-36 cursor-pointer" src={Logo} alt="Logo" />
+        </Link>
         <ul className="flex justify-between items-center w-72 ml-20 pt-3">
-          <li className="flex flex-col cursor-grab">
-            <span className=" text-md font-bold">원룸</span>
-            <span className="text-xs">전월세</span>
-          </li>
-          <li className="flex flex-col cursor-grab">
-            <span className=" text-md font-bold">투룸</span>
-            <span className="text-xs">전월세</span>
-          </li>
-          <li className="flex flex-col cursor-grab">
-            <span className=" text-md font-bold">내집 내놓기</span>
-            <span className="text-xs">방 직거래</span>
-          </li>
+          {nav.map((el, idx) => (
+            <div key={idx}>
+              <Link href={el.address}>
+                <li className="flex flex-col cursor-grab">
+                  <span className=" text-md font-bold">{el.title}</span>
+                  <span className="text-xs">{el.subTitle}</span>
+                </li>
+              </Link>
+            </div>
+          ))}
         </ul>
       </div>
       <div className="flex items-center">
@@ -37,9 +56,11 @@ export const Header = () => {
         <span className="ml-3 font-semibold">ㅇㅇㅇ님</span>
       </div> */}
       <div className="flex items-center">
-        <div className="flex items-center bg-primary-200 h-10 p-5 rounded-md text-white text-sm cursor-pointer hover:bg-hover">
-          로그인 및 회원가입
-        </div>
+        <Link href={"/login"}>
+          <div className="flex items-center bg-primary-200 h-10 p-5 rounded-md text-white text-sm cursor-pointer hover:bg-hover">
+            로그인 및 회원가입
+          </div>
+        </Link>
       </div>
     </div>
   );

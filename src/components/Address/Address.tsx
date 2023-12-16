@@ -6,19 +6,25 @@ interface AddressProps {
 }
 
 const FindAddress: React.FC<AddressProps> = ({ setter }) => {
+  const [popup, setPopup] = useState<boolean>(false);
   const [address, setAddress] = useState<string>("");
+
+  const handleComplete = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setPopup(!popup);
+  };
 
   useEffect(() => {
     setter(address);
   }, [address, setter]);
 
   return (
-    <>
-      <div>
-        <button>검색</button>
-        {/* <Post  /> */}
-      </div>
-    </>
+    <div>
+      <button className="bg-black text-white w-16 ml-2 rounded-md h-10" onClick={handleComplete}>
+        검색
+      </button>
+      {popup && <Post setAddress={setAddress} setPopup={setPopup} />}
+    </div>
   );
 };
 

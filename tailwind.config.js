@@ -32,6 +32,7 @@ module.exports = {
           200: "#D9D9D9",
           300: "#656565",
         },
+        modal: "rgba(0,0,0,0.7)",
         hover: "#14A7E6",
         kakao: "#fbe300",
         font: {

@@ -1,10 +1,15 @@
+"use client";
+
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import RegiOption from "./_components/RegiOption/page";
 import UploadFile from "./_components/UploadFile/page";
 import { Header } from "@/components/Header/Header";
+import FindAddress from "@/components/Address/Address";
+import { useState } from "react";
 
 export default function Register() {
+  const [address, setAddress] = useState("");
   return (
     <>
       <Header />
@@ -48,8 +53,9 @@ export default function Register() {
                   <input
                     className="border text-sm p-2 rounded-md w-2/3"
                     placeholder="예) 000동 00-0, 00구 00동"
+                    value={address}
                   />
-                  <button className="bg-black text-white w-16 ml-2 rounded-md">검색</button>
+                  <FindAddress setter={setAddress} />
                 </div>
                 <input
                   className="border text-sm p-2 rounded-md w-2/3"

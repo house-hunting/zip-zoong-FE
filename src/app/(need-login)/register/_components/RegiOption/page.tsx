@@ -10,8 +10,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { RadioForm } from "../FormFields/radioForm";
 
-export default function RegiOption() {
+export default function RegiOption({ control, errors }: any) {
   return (
     <>
       <div className="grid grid-cols-6 justify-between">
@@ -20,14 +21,30 @@ export default function RegiOption() {
         </div>
         <div className="col-span-2 p-3">
           <RadioGroup className="flex items-center col-span-3 h-16 mx-3" defaultValue="comfortable">
-            <div className="flex items-center space-x-2 mr-12">
+            {/* <div className="flex items-center space-x-2 mr-12">
               <RadioGroupItem className="text-primary-100" value="now" id="r1" />
               <Label htmlFor="r1">즉시 입주</Label>
             </div>
             <div className="flex items-center space-x-2">
               <RadioGroupItem className="text-primary-100" value="choose" id="r2" />
               <Label htmlFor="r2">일자 선택</Label>
-            </div>
+            </div> */}
+            <RadioForm
+              name="selectDate"
+              value="1"
+              style="flex items-center space-x-2 mr-12"
+              label="즉시 입주"
+              control={control}
+              errors={errors}
+            />
+            <RadioForm
+              name="selectDate"
+              value="2"
+              style="flex items-center space-x-2"
+              label="일자 선택"
+              control={control}
+              errors={errors}
+            />
           </RadioGroup>
         </div>
         <div className="flex justify-center items-center">
@@ -105,14 +122,30 @@ export default function RegiOption() {
               className="flex items-center col-span-3 h-16 mx-3"
               defaultValue="comfortable"
             >
-              <div className="flex items-center space-x-2 mr-12">
+              {/* <div className="flex items-center space-x-2 mr-12">
                 <RadioGroupItem className="text-primary-100" value="month" id="r1" />
-                <Label htmlFor="r1">원룸</Label>
+                <Label htmlFor="r1">없음</Label>
               </div>
               <div className="flex items-center space-x-2">
                 <RadioGroupItem className="text-primary-100" value="rent" id="r2" />
-                <Label htmlFor="r2">투룸</Label>
-              </div>
+                <Label htmlFor="r2">있음</Label>
+              </div> */}
+              <RadioForm
+                name="elevator"
+                value="1"
+                style="flex items-center space-x-2 mr-12"
+                label="없음"
+                control={control}
+                errors={errors}
+              />
+              <RadioForm
+                name="elevator"
+                value="2"
+                style="flex items-center space-x-2"
+                label="있음"
+                control={control}
+                errors={errors}
+              />
             </RadioGroup>
           </div>
           {/*  */}
@@ -120,14 +153,30 @@ export default function RegiOption() {
             <span className="font-semibold">주차 가능 여부</span>
             <div className="flex">
               <RadioGroup className="flex items-center h-16 mx-3" defaultValue="comfortable">
-                <div className="flex items-center space-x-2 w-24">
+                {/* <div className="flex items-center space-x-2 w-24">
                   <RadioGroupItem className="text-primary-100" value="false" id="r1" />
                   <Label htmlFor="r1">불가능</Label>
                 </div>
                 <div className="flex items-center space-x-2 w-24">
                   <RadioGroupItem className="text-primary-100" value="true" id="r2" />
                   <Label htmlFor="r2">가능</Label>
-                </div>
+                </div> */}
+                <RadioForm
+                  name="parking"
+                  value="1"
+                  style="flex items-center space-x-2 w-24"
+                  label="불가능"
+                  control={control}
+                  errors={errors}
+                />
+                <RadioForm
+                  name="parking"
+                  value="2"
+                  style="flex items-center space-x-2 w-24"
+                  label="가능"
+                  control={control}
+                  errors={errors}
+                />
               </RadioGroup>
               <div className="flex items-center ml-14">
                 <input className="border p-2 rounded-md" />

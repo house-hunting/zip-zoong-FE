@@ -1,19 +1,47 @@
 "use client";
 
-import { Label } from "@/components/ui/label";
+// import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import RegiOption from "./_components/RegiOption/page";
 import UploadFile from "./_components/UploadFile/page";
 import { Header } from "@/components/Header/Header";
 import FindAddress from "@/components/Address/Address";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { RegisterSchema } from "./_components/regiSchema";
+import { RadioForm } from "./_components/FormFields/radioForm";
+
+type FormDatas = {
+  roomType: string;
+  roomInfo: string;
+  rentType: string;
+  cost: string;
+  selectDate: string;
+  elevator: string;
+  parking: string;
+};
 
 export default function Register() {
   const [address, setAddress] = useState("");
+
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<FormDatas>({ resolver: yupResolver(RegisterSchema) });
+
+  const onSubmit = (data) => {
+    alert(JSON.stringify(data));
+    console.log(data);
+  };
   return (
     <>
       <Header />
-      <form className="flex justify-center items-center flex-col p-20">
+      <form
+        className="flex justify-center items-center flex-col p-20"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <div className="font-bold text-big m-20">내집 내놓기</div>
         <ul className="list-disc flex flex-col w-4/6 ml-10 font-semibold leading-8">
           <li>전/월세 매물만 등록할 수 있습니다.</li>
@@ -28,7 +56,7 @@ export default function Register() {
               <div className="flex justify-center items-center border ">
                 <div className="font-bold">매물 유형</div>
               </div>
-              <RadioGroup
+              {/* <RadioGroup
                 className="flex justify-around items-center col-span-5 h-16"
                 defaultValue="comfortable"
               >
@@ -40,6 +68,27 @@ export default function Register() {
                   <RadioGroupItem className="text-primary-100" value="two" id="r2" />
                   <Label htmlFor="r2">투룸</Label>
                 </div>
+              </RadioGroup> */}
+              <RadioGroup
+                className="flex justify-around items-center col-span-5 h-16"
+                defaultValue="comfortable"
+              >
+                <RadioForm
+                  name="roomType"
+                  value="1"
+                  style="flex justify-around items-center col-span-5 h-16"
+                  label="원룸"
+                  control={control}
+                  errors={errors}
+                />
+                <RadioForm
+                  name="roomType"
+                  value="2"
+                  style="flex justify-around items-center col-span-5 h-16"
+                  label="투룸"
+                  control={control}
+                  errors={errors}
+                />
               </RadioGroup>
             </div>
             {/*  */}
@@ -80,7 +129,7 @@ export default function Register() {
                   className="flex justify-center items-center w-3/4"
                   defaultValue="comfortable"
                 >
-                  <div className="flex items-center space-x-2 mx-8">
+                  {/* <div className="flex items-center space-x-2 mx-8">
                     <RadioGroupItem className="text-primary-100" value="open" id="r1" />
                     <Label htmlFor="r1">오픈형</Label>
                   </div>
@@ -91,7 +140,31 @@ export default function Register() {
                   <div className="flex items-center space-x-2 mx-8">
                     <RadioGroupItem className="text-primary-100" value="double" id="r3" />
                     <Label htmlFor="r3">복층형</Label>
-                  </div>
+                  </div> */}
+                  <RadioForm
+                    name="roomInfo"
+                    value="1"
+                    style="flex items-center space-x-2 mx-8"
+                    label="오픈형"
+                    control={control}
+                    errors={errors}
+                  />
+                  <RadioForm
+                    name="roomInfo"
+                    value="2"
+                    style="flex items-center space-x-2 mx-8"
+                    label="분리형"
+                    control={control}
+                    errors={errors}
+                  />
+                  <RadioForm
+                    name="roomInfo"
+                    value="3"
+                    style="flex items-center space-x-2 mx-8"
+                    label="복층형"
+                    control={control}
+                    errors={errors}
+                  />
                 </RadioGroup>
               </div>
             </div>
@@ -104,14 +177,30 @@ export default function Register() {
                 className="flex items-center col-span-3 h-16 mx-3"
                 defaultValue="comfortable"
               >
-                <div className="flex items-center space-x-2 mr-12">
+                {/* <div className="flex items-center space-x-2 mr-12">
                   <RadioGroupItem className="text-primary-100" value="month" id="r1" />
-                  <Label htmlFor="r1">원룸</Label>
+                  <Label htmlFor="r1">월세</Label>
                 </div>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem className="text-primary-100" value="rent" id="r2" />
-                  <Label htmlFor="r2">투룸</Label>
-                </div>
+                  <Label htmlFor="r2">전세</Label>
+                </div> */}
+                <RadioForm
+                  name="rentType"
+                  value="1"
+                  style="flex items-center space-x-2 mr-12"
+                  label="월세"
+                  control={control}
+                  errors={errors}
+                />
+                <RadioForm
+                  name="rentType"
+                  value="2"
+                  style="flex items-center space-x-2 mr-12"
+                  label="전세"
+                  control={control}
+                  errors={errors}
+                />
               </RadioGroup>
             </div>
             {/*  */}
@@ -143,14 +232,30 @@ export default function Register() {
                       className="flex items-center col-span-3 h-16 mx-3"
                       defaultValue="comfortable"
                     >
-                      <div className="flex items-center space-x-2 mr-12">
+                      {/* <div className="flex items-center space-x-2 mr-12">
                         <RadioGroupItem className="text-primary-100" value="false" id="r1" />
                         <Label htmlFor="r1">없음</Label>
                       </div>
                       <div className="flex items-center space-x-2">
                         <RadioGroupItem className="text-primary-100" value="true" id="r2" />
                         <Label htmlFor="r2">있음</Label>
-                      </div>
+                      </div> */}
+                      <RadioForm
+                        name="cost"
+                        value="1"
+                        style="flex items-center space-x-2 mr-12"
+                        label="없음"
+                        control={control}
+                        errors={errors}
+                      />
+                      <RadioForm
+                        name="cost"
+                        value="2"
+                        style="flex items-center space-x-2"
+                        label="있음"
+                        control={control}
+                        errors={errors}
+                      />
                     </RadioGroup>
                     <div className="flex items-center ml-20">
                       <input className="border p-2 rounded-md" />
@@ -161,7 +266,7 @@ export default function Register() {
               </div>
             </div>
             {/*  */}
-            <RegiOption />
+            <RegiOption control={control} errors={errors} />
             <UploadFile />
             {/*  */}
             <div className="grid grid-cols-6 justify-between">

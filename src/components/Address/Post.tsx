@@ -22,7 +22,7 @@ const Post: React.FC<PostPropsType> = ({ setAddress, setPopup }) => {
     <div className="fixed top-0 left-0 h-screen w-full z-30 bg-modal flex justify-center items-center">
       <div className="bg-white relative pt-12 rounded-md">
         <button
-          className="absolute top-0 right-3 text-lg text-gray-400"
+          className="absolute top-0 right-3 text-lg text-gray-600"
           onClick={() => setPopup(false)}
         >
           X

@@ -11,8 +11,15 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { RadioForm } from "../FormFields/radioForm";
+import { Control, FieldErrors, RegisterOptions, SetFieldValue } from "react-hook-form";
 
-export default function RegiOption({ control, errors }: any) {
+// interface InputProps {
+//   control: Control<FormData>;
+//   errors: FieldErrors<FormData>;
+//   register: RegisterOptions;
+//   setValue: SetFieldValue<FormData>;
+// }
+export default function RegiOption({ control, errors, register, name }: any) {
   return (
     <>
       <div className="grid grid-cols-6 justify-between">
@@ -65,21 +72,26 @@ export default function RegiOption({ control, errors }: any) {
                   <SelectTrigger className="w-[180px]">
                     <SelectValue placeholder="층 수 선택" />
                   </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectItem value="1">1층</SelectItem>
-                      <SelectItem value="2">2층</SelectItem>
-                      <SelectItem value="3">3층</SelectItem>
-                      <SelectItem value="4">4층</SelectItem>
-                      <SelectItem value="5">5층</SelectItem>
-                      <SelectItem value="6">6층</SelectItem>
-                      <SelectItem value="7">7층</SelectItem>
-                      <SelectItem value="8">8층</SelectItem>
-                      <SelectItem value="9">9층</SelectItem>
-                      <SelectItem value="10">10층</SelectItem>
-                    </SelectGroup>
+                  <SelectContent {...(register("totalFloors"), { required: "Select an option" })}>
+                    {/* <SelectGroup> */}
+                    <SelectItem value="1">1층</SelectItem>
+                    <SelectItem value="2">2층</SelectItem>
+                    <SelectItem value="3">3층</SelectItem>
+                    <SelectItem value="4">4층</SelectItem>
+                    <SelectItem value="5">5층</SelectItem>
+                    <SelectItem value="6">6층</SelectItem>
+                    <SelectItem value="7">7층</SelectItem>
+                    <SelectItem value="8">8층</SelectItem>
+                    <SelectItem value="9">9층</SelectItem>
+                    <SelectItem value="10">10층</SelectItem>
+                    {/* </SelectGroup> */}
                   </SelectContent>
                 </Select>
+                {errors.totalFloors && (
+                  <div className="text-red-500" role="alert">
+                    {errors.totalFloors.message}
+                  </div>
+                )}
               </div>
             </div>
             <div>

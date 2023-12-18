@@ -20,6 +20,8 @@ type FormDatas = {
   selectDate: string;
   elevator: string;
   parking: string;
+  totalFloors: string;
+  floorsNumber: string;
 };
 
 export default function Register() {
@@ -28,6 +30,8 @@ export default function Register() {
   const {
     handleSubmit,
     control,
+    register,
+    setValue,
     formState: { errors },
   } = useForm<FormDatas>({ resolver: yupResolver(RegisterSchema) });
 
@@ -266,7 +270,7 @@ export default function Register() {
               </div>
             </div>
             {/*  */}
-            <RegiOption control={control} errors={errors} />
+            <RegiOption control={control} errors={errors} register={register} setValue={setValue} />
             <UploadFile />
             {/*  */}
             <div className="grid grid-cols-6 justify-between">

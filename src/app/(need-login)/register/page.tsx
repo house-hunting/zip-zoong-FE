@@ -270,7 +270,7 @@ export default function Register() {
               </div>
             </div>
             {/*  */}
-            <RegiOption control={control} errors={errors} register={register} setValue={setValue} />
+            <RegiOption control={control} errors={errors} register={register} />
             <UploadFile />
             {/*  */}
             <div className="grid grid-cols-6 justify-between">

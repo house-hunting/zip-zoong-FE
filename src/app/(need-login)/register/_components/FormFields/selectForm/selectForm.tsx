@@ -22,9 +22,7 @@ type SelectOption = {
 interface InputProps {
   name: keyof FormData;
   title: string;
-  label: string;
   placeholder: string;
-  value: string;
   data: SelectOption[];
   control: Control<FormData>;
   errors: FieldErrors<FormData>;
@@ -35,9 +33,8 @@ export const SelectForm: React.FC<InputProps> = ({
   name,
   control,
   title,
-  value,
   data,
-  label,
+  placeholder,
   errors,
   ...children
 }) => {
@@ -52,11 +49,11 @@ export const SelectForm: React.FC<InputProps> = ({
             <div className="my-3">
               <Select {...field} {...children}>
                 <SelectTrigger className="w-[180px]">
-                  <SelectValue />
+                  <SelectValue placeholder={placeholder} />
                 </SelectTrigger>
                 <SelectContent>
                   {data.map((el, idx) => (
-                    <SelectItem key={idx} value={el.value}>
+                    <SelectItem key={idx} value={el.value as string}>
                       {el.floor}
                     </SelectItem>
                   ))}
@@ -66,18 +63,6 @@ export const SelectForm: React.FC<InputProps> = ({
           </>
         )}
       />
-
-      <SelectContent>
-        <Controller
-          name={name}
-          control={control}
-          render={({ field }) => (
-            <SelectItem {...field} {...children} value={value}>
-              {label}
-            </SelectItem>
-          )}
-        />
-      </SelectContent>
 
       {errors && (
         <div className="text-font-error text-xs">

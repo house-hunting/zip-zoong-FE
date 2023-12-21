@@ -1,23 +1,10 @@
 import { DatePicker } from "@/components/DatePicker/DatePicker";
 import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup } from "@/components/ui/radio-group";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { RadioForm } from "../FormFields/radioForm";
-import { Control, FieldErrors, RegisterOptions, SetFieldValue } from "react-hook-form";
+import { SelectForm } from "../FormFields/selectForm/selectForm";
+import { floorsNumber, totalFloors } from "../FormFields/selectForm/selectOption";
 
-// interface InputProps {
-//   control: Control<FormData>;
-//   errors: FieldErrors<FormData>;
-//   register: RegisterOptions;
-//   setValue: SetFieldValue<FormData>;
-// }
 export default function RegiOption({ control, errors, register }: any) {
   return (
     <>
@@ -57,56 +44,24 @@ export default function RegiOption({ control, errors, register }: any) {
         <div className="col-span-3 p-3">
           <div className="flex">
             <div className="mr-5">
-              {/* <span className="font-semibold">전체 층 수</span>
-              <div className="my-3">
-                <Select>
-                  <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="층 수 선택" />
-                  </SelectTrigger>
-                  <SelectContent name="totalFloors" {...register("totalFloors")}>
-                    <SelectItem value="1">1층</SelectItem>
-                    <SelectItem value="2">2층</SelectItem>
-                    <SelectItem value="3">3층</SelectItem>
-                    <SelectItem value="4">4층</SelectItem>
-                    <SelectItem value="5">5층</SelectItem>
-                    <SelectItem value="6">6층</SelectItem>
-                    <SelectItem value="7">7층</SelectItem>
-                    <SelectItem value="8">8층</SelectItem>
-                    <SelectItem value="9">9층</SelectItem>
-                    <SelectItem value="10">10층</SelectItem>
-                  </SelectContent>
-                </Select>
-                {errors.totalFloors && (
-                  <div className="text-red-500" role="alert">
-                    {errors.totalFloors.message}
-                  </div>
-                )}
-              </div> */}
+              <SelectForm
+                name={"totalFloors"}
+                title="전체 층 수"
+                placeholder="층 수 선택"
+                data={totalFloors}
+                control={control}
+                errors={errors}
+              />
             </div>
             <div>
-              <span className="font-semibold">해당 층 수</span>
-              <div className="my-3">
-                <Select>
-                  <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="해당 층 수 선택" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectItem value="0">반지하</SelectItem>
-                      <SelectItem value="1">1층</SelectItem>
-                      <SelectItem value="2">2층</SelectItem>
-                      <SelectItem value="3">3층</SelectItem>
-                      <SelectItem value="4">4층</SelectItem>
-                      <SelectItem value="5">5층</SelectItem>
-                      <SelectItem value="6">6층</SelectItem>
-                      <SelectItem value="7">7층</SelectItem>
-                      <SelectItem value="8">8층</SelectItem>
-                      <SelectItem value="9">9층</SelectItem>
-                      <SelectItem value="10">10층</SelectItem>
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-              </div>
+              <SelectForm
+                name={"totalFloors"}
+                title="해당 층 수"
+                placeholder="해당 층 수 선택"
+                data={floorsNumber}
+                control={control}
+                errors={errors}
+              />
             </div>
           </div>
         </div>

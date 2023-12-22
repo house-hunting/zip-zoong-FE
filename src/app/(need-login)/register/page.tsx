@@ -1,28 +1,16 @@
 "use client";
 
-// import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import RegiOption from "./_components/RegiOption/page";
+import { RadioGroup } from "@/components/ui/radio-group";
 import UploadFile from "./_components/UploadFile/page";
 import { Header } from "@/components/Header/Header";
 import FindAddress from "@/components/Address/Address";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { RegisterSchema } from "./_components/regiSchema";
+import { RegiFormDatas, RegisterSchema } from "./_components/regiSchema";
 import { RadioForm } from "./_components/FormFields/radioForm";
-
-type FormDatas = {
-  roomType: string;
-  roomInfo: string;
-  rentType: string;
-  cost: string;
-  selectDate: string;
-  elevator: string;
-  parking: string;
-  totalFloors: string;
-  floorsNumber: string;
-};
+import { RegiOption } from "./_components/RegiOption/page";
+import { InputForm } from "./_components/FormFields/inputForm";
 
 export default function Register() {
   const [address, setAddress] = useState("");
@@ -31,9 +19,8 @@ export default function Register() {
     handleSubmit,
     control,
     register,
-    setValue,
     formState: { errors },
-  } = useForm<FormDatas>({ resolver: yupResolver(RegisterSchema) });
+  } = useForm<RegiFormDatas>({ resolver: yupResolver(RegisterSchema) });
 
   const onSubmit = (data) => {
     alert(JSON.stringify(data));
@@ -60,19 +47,6 @@ export default function Register() {
               <div className="flex justify-center items-center border ">
                 <div className="font-bold">매물 유형</div>
               </div>
-              {/* <RadioGroup
-                className="flex justify-around items-center col-span-5 h-16"
-                defaultValue="comfortable"
-              >
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem className="text-primary-100" value="one" id="r1" />
-                  <Label htmlFor="r1">원룸</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem className="text-primary-100" value="two" id="r2" />
-                  <Label htmlFor="r2">투룸</Label>
-                </div>
-              </RadioGroup> */}
               <RadioGroup
                 className="flex justify-around items-center col-span-5 h-16"
                 defaultValue="comfortable"
@@ -102,16 +76,21 @@ export default function Register() {
               </div>
               <div className="col-span-3 p-3">
                 <span className="font-semibold">주소 검색</span>
-                <div className="flex my-3">
-                  <input
-                    className="border text-sm p-2 rounded-md w-2/3"
+                <div className="flex my-3 ">
+                  <InputForm
+                    name="address"
+                    control={control}
+                    style="border text-sm p-2 rounded-md w-2/3"
                     placeholder="예) 000동 00-0, 00구 00동"
                     value={address}
                   />
                   <FindAddress setter={setAddress} />
                 </div>
-                <input
-                  className="border text-sm p-2 rounded-md w-2/3"
+                <InputForm
+                  name="address"
+                  control={control}
+                  errors={errors}
+                  style="border text-sm p-2 rounded-md w-2/3"
                   placeholder="상세주소 입력"
                 />
               </div>
@@ -124,27 +103,21 @@ export default function Register() {
               <div className="flex items-center justify-between col-span-5 p-3">
                 <div>
                   <span className="font-semibold">전용 면적</span>
-                  <div className="flex items-center justify-center my-3">
-                    <input className=" border p-2 rounded-md" placeholder="평수 입력" />
-                    <span className="mx-2">평</span>
+                  <div className="my-3">
+                    <InputForm
+                      name="roomArea"
+                      control={control}
+                      errors={errors}
+                      style=" border p-2 rounded-md text-end"
+                      placeholder="평수 입력"
+                      label="평"
+                    />
                   </div>
                 </div>
                 <RadioGroup
                   className="flex justify-center items-center w-3/4"
                   defaultValue="comfortable"
                 >
-                  {/* <div className="flex items-center space-x-2 mx-8">
-                    <RadioGroupItem className="text-primary-100" value="open" id="r1" />
-                    <Label htmlFor="r1">오픈형</Label>
-                  </div>
-                  <div className="flex items-center space-x-2 mx-8">
-                    <RadioGroupItem className="text-primary-100" value="separation" id="r2" />
-                    <Label htmlFor="r2">분리형</Label>
-                  </div>
-                  <div className="flex items-center space-x-2 mx-8">
-                    <RadioGroupItem className="text-primary-100" value="double" id="r3" />
-                    <Label htmlFor="r3">복층형</Label>
-                  </div> */}
                   <RadioForm
                     name="roomInfo"
                     value="1"
@@ -181,14 +154,6 @@ export default function Register() {
                 className="flex items-center col-span-3 h-16 mx-3"
                 defaultValue="comfortable"
               >
-                {/* <div className="flex items-center space-x-2 mr-12">
-                  <RadioGroupItem className="text-primary-100" value="month" id="r1" />
-                  <Label htmlFor="r1">월세</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem className="text-primary-100" value="rent" id="r2" />
-                  <Label htmlFor="r2">전세</Label>
-                </div> */}
                 <RadioForm
                   name="rentType"
                   value="1"
@@ -217,15 +182,27 @@ export default function Register() {
                   <div className="mr-5">
                     <span className="font-semibold">보증금</span>
                     <div className="my-3">
-                      <input className="border p-2 rounded-md" />
-                      <span className="ml-2">만원</span>
+                      <InputForm
+                        name="deposit"
+                        control={control}
+                        errors={errors}
+                        style="border p-2 rounded-md text-end"
+                        placeholder="0"
+                        label="만원"
+                      />
                     </div>
                   </div>
                   <div>
                     <span className="font-semibold">월세</span>
                     <div className="my-3">
-                      <input className="border p-2 rounded-md" />
-                      <span className="ml-2">만원</span>
+                      <InputForm
+                        name="month"
+                        control={control}
+                        errors={errors}
+                        style="border p-2 rounded-md text-end"
+                        placeholder="0"
+                        label="만원"
+                      />
                     </div>
                   </div>
                 </div>
@@ -236,14 +213,6 @@ export default function Register() {
                       className="flex items-center col-span-3 h-16 mx-3"
                       defaultValue="comfortable"
                     >
-                      {/* <div className="flex items-center space-x-2 mr-12">
-                        <RadioGroupItem className="text-primary-100" value="false" id="r1" />
-                        <Label htmlFor="r1">없음</Label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem className="text-primary-100" value="true" id="r2" />
-                        <Label htmlFor="r2">있음</Label>
-                      </div> */}
                       <RadioForm
                         name="cost"
                         value="1"
@@ -261,16 +230,22 @@ export default function Register() {
                         errors={errors}
                       />
                     </RadioGroup>
-                    <div className="flex items-center ml-20">
-                      <input className="border p-2 rounded-md" />
-                      <span className="ml-2">만원</span>
+                    <div className="ml-20">
+                      <InputForm
+                        name="roomCost"
+                        control={control}
+                        errors={errors}
+                        style="border p-2 rounded-md text-end"
+                        placeholder="0"
+                        label="만원"
+                      />
                     </div>
                   </div>
                 </div>
               </div>
             </div>
             {/*  */}
-            <RegiOption control={control} errors={errors} register={register} />
+            <RegiOption control={control} errors={errors} />
             <UploadFile />
             {/*  */}
             <div className="grid grid-cols-6 justify-between">
@@ -279,9 +254,12 @@ export default function Register() {
               </div>
               <div className="col-span-5 p-3">
                 <span className="font-semibold">제목</span>
-                <div className="flex my-3 w-full">
-                  <input
-                    className="border text-sm p-3 rounded-md w-2/3"
+                <div className="my-3 w-full">
+                  <InputForm
+                    name="title"
+                    control={control}
+                    errors={errors}
+                    style="border text-sm p-3 rounded-md w-2/3 mb-2"
                     placeholder="리스트에 노출되는 문구입니다. 40자 이내로 작성해 주세요."
                   />
                 </div>
@@ -289,7 +267,13 @@ export default function Register() {
                 <textarea
                   className="w-full border rounded-md p-3 h-60"
                   placeholder="매물 상세 페이지에 노출되는 문구입니다. 1000자 이내로 작성해 주세요."
+                  {...register("textArea", {
+                    required: "본문 내용은 필수 사항입니다.",
+                  })}
                 ></textarea>
+                {errors.textArea && (
+                  <div className="text-font-error text-xs">{errors.textArea.message}</div>
+                )}
               </div>
             </div>
             {/*  */}

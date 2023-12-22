@@ -4,8 +4,9 @@ import { RadioGroup } from "@/components/ui/radio-group";
 import { RadioForm } from "../FormFields/radioForm";
 import { SelectForm } from "../FormFields/selectForm/selectForm";
 import { floorsNumber, totalFloors } from "../FormFields/selectForm/selectOption";
-import { Control, FieldErrors, FieldValues } from "react-hook-form";
+import { Control, FieldErrors } from "react-hook-form";
 import { RegiFormDatas } from "../regiSchema";
+import { InputForm } from "../FormFields/inputForm";
 
 type FormData = {
   roomType?: string;
@@ -14,13 +15,13 @@ type FormData = {
   selectDate?: string;
   elevator?: string;
   parking?: string;
-  totalFloors?: string;
-  floorsNumber?: string;
+  // totalFloors?: string;
+  // floorsNumber?: string;
 };
 
 type OptionProps = {
   control: Control<RegiFormDatas>;
-  errors: FieldErrors<FormData>;
+  errors: FieldErrors<RegiFormDatas>;
 };
 
 export const RegiOption: React.FC<OptionProps> = ({ control, errors }) => {
@@ -136,9 +137,15 @@ export const RegiOption: React.FC<OptionProps> = ({ control, errors }) => {
                   errors={errors}
                 />
               </RadioGroup>
-              <div className="flex items-center ml-14">
-                <input className="border p-2 rounded-md" />
-                <span className="ml-2">만원</span>
+              <div className="ml-14">
+                <InputForm
+                  name="parkingCost"
+                  control={control}
+                  errors={errors}
+                  style="border p-2 rounded-md text-end"
+                  placeholder="0"
+                  label="만원"
+                />
               </div>
             </div>
           </div>

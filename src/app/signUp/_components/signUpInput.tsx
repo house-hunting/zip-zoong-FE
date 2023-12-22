@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { Control, Controller, FieldErrors } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 
-export type FormData = {
+type FormData = {
   email: string;
   password: string;
   confirmPW: string;

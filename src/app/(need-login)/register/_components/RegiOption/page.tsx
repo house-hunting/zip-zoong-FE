@@ -4,8 +4,26 @@ import { RadioGroup } from "@/components/ui/radio-group";
 import { RadioForm } from "../FormFields/radioForm";
 import { SelectForm } from "../FormFields/selectForm/selectForm";
 import { floorsNumber, totalFloors } from "../FormFields/selectForm/selectOption";
+import { Control, FieldErrors, FieldValues } from "react-hook-form";
+import { RegiFormDatas } from "../regiSchema";
 
-export default function RegiOption({ control, errors, register }: any) {
+type FormData = {
+  roomType?: string;
+  roomInfo?: string;
+  cost?: string;
+  selectDate?: string;
+  elevator?: string;
+  parking?: string;
+  totalFloors?: string;
+  floorsNumber?: string;
+};
+
+type OptionProps = {
+  control: Control<RegiFormDatas>;
+  errors: FieldErrors<FormData>;
+};
+
+export const RegiOption: React.FC<OptionProps> = ({ control, errors }) => {
   return (
     <>
       <div className="grid grid-cols-6 justify-between">
@@ -55,7 +73,7 @@ export default function RegiOption({ control, errors, register }: any) {
             </div>
             <div>
               <SelectForm
-                name={"totalFloors"}
+                name={"floorsNumber"}
                 title="해당 층 수"
                 placeholder="해당 층 수 선택"
                 data={floorsNumber}
@@ -188,4 +206,4 @@ export default function RegiOption({ control, errors, register }: any) {
       </div>
     </>
   );
-}
+};

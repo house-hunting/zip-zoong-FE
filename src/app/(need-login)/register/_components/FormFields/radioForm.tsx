@@ -1,17 +1,18 @@
 import { ReactNode } from "react";
-import { Control, Controller, FieldErrors } from "react-hook-form";
+import { Control, Controller, FieldErrors, FieldValues } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
+import { RegiFormDatas } from "../regiSchema";
 
 type FormData = {
-  roomType: string;
-  roomInfo: string;
-  rentType: string;
-  cost: string;
-  selectDate: string;
-  elevator: string;
-  parking: string;
+  roomType?: string;
+  roomInfo?: string;
+  cost?: string;
+  rentType?: string;
+  selectDate?: string;
+  elevator?: string;
+  parking?: string;
 };
 
 interface InputProps {
@@ -19,7 +20,7 @@ interface InputProps {
   style: string;
   label: string;
   value: string;
-  control: Control<FormData>;
+  control: Control<RegiFormDatas>;
   errors: FieldErrors<FormData>;
   children?: ReactNode;
 }

@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Control, Controller, FieldErrors } from "react-hook-form";
+import { Control, Controller, FieldErrors, FieldValues } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import {
   Select,
@@ -8,6 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { RegiFormDatas } from "../../regiSchema";
 
 type FormData = {
   totalFloors: string;
@@ -24,7 +25,7 @@ interface InputProps {
   title: string;
   placeholder: string;
   data: SelectOption[];
-  control: Control<FormData>;
+  control: Control<RegiFormDatas>;
   errors: FieldErrors<FormData>;
   children?: ReactNode;
 }
@@ -47,13 +48,18 @@ export const SelectForm: React.FC<InputProps> = ({
           <>
             <span className="font-semibold">{title}</span>
             <div className="my-3">
-              <Select {...field} {...children}>
+              <Select
+                {...field}
+                {...children}
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+              >
                 <SelectTrigger className="w-[180px]">
                   <SelectValue placeholder={placeholder} />
                 </SelectTrigger>
                 <SelectContent>
                   {data.map((el, idx) => (
-                    <SelectItem key={idx} value={el.value as string}>
+                    <SelectItem key={idx} value={el.value || ""}>
                       {el.floor}
                     </SelectItem>
                   ))}

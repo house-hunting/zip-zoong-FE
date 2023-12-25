@@ -13,10 +13,10 @@ const SignUpSchema = yup.object().shape({
   password: yup
     .string()
     .required("비밀번호는 필수 입력입니다.")
-    .min(8, "최소8자 이상 입력해주세요")
     .max(18, "18자 이내로 입력해주세요")
+    .min(8, "최소8자 이상 입력해주세요")
     .matches(
-      /^.*(?=^.{8,18}$)(?=.*d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/,
+      /^.*(?=^.{8,18}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/,
       "특수문자, 문자, 숫자를 포함한 형태의 암호를 입력해 주세요"
     ),
   confirmPW: yup
@@ -24,6 +24,7 @@ const SignUpSchema = yup.object().shape({
     .required("비밀번호를 다시 확인해주세요.")
     .oneOf([yup.ref("password")], "비밀번호가 일치하지 않습니다."),
 });
+
 export default function SignUp() {
   type FormData = {
     email: string;
@@ -37,9 +38,27 @@ export default function SignUp() {
     formState: { errors },
   } = useForm<FormData>({ resolver: yupResolver(SignUpSchema) });
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data: FormData) => {
     alert(JSON.stringify(data));
     console.log(data);
+
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/auth/join`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!res.ok) {
+        throw new Error("회원가입에 실패하셨습니다");
+      }
+
+      // const resData = res.json();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

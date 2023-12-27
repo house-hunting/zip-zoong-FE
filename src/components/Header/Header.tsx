@@ -1,8 +1,12 @@
+"use client";
+
 import Image from "next/image";
 import Logo from "/public/집중 메인로고.png";
 import ProfileImg from "/public/기본 프로필 이미지.png";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import Link from "next/link";
+import { LoginDataType } from "@/store/loginData.atoms";
+import { useEffect, useState } from "react";
 
 const nav = [
   {
@@ -22,7 +26,38 @@ const nav = [
   },
 ];
 
-export const Header = () => {
+export const Header: React.FC = () => {
+  const [local, setLocal] = useState<LoginDataType | null>(null);
+  console.log(local);
+
+  useEffect(() => {
+    const userInfo = localStorage.getItem("userId");
+
+    if (userInfo) {
+      const userData: LoginDataType = JSON.parse(userInfo);
+      setLocal(userData);
+    }
+  }, []);
+
+  const logOut = async () => {
+    localStorage.removeItem("userId");
+    setLocal(null);
+
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/auth/logout`);
+
+      if (!res.ok) {
+        if (!res.ok) throw new Error("");
+      }
+
+      const resData = await res.json();
+
+      console.log(resData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className="flex justify-between py-3 px-16">
       <div className="flex">
@@ -51,17 +86,28 @@ export const Header = () => {
           <FaMagnifyingGlass color={"white"} size={25} />
         </button>
       </div>
-      {/* <div className="flex items-center">
-        <Image className="w-11" src={ProfileImg} alt="Profile" />
-        <span className="ml-3 font-semibold">ㅇㅇㅇ님</span>
-      </div> */}
-      <div className="flex items-center">
-        <Link href={"/login"}>
-          <div className="flex items-center bg-primary-200 h-10 p-5 rounded-md text-white text-sm cursor-pointer hover:bg-hover">
-            로그인 및 회원가입
+      {local ? (
+        <div className="flex items-center justify-center">
+          <div className="flex items-center mr-10 cursor-pointer">
+            <Image className="w-11" src={ProfileImg} alt="Profile" />
+            <span className="ml-3 font-semibold">{`${local.email}님`}</span>
           </div>
-        </Link>
-      </div>
+          <div
+            className="flex items-center bg-primary-200 h-10 p-5 rounded-md text-white text-sm cursor-pointer hover:bg-hover"
+            onClick={logOut}
+          >
+            로그아웃
+          </div>
+        </div>
+      ) : (
+        <div className="flex items-center">
+          <Link href={"/login"}>
+            <div className="flex items-center bg-primary-200 h-10 p-5 rounded-md text-white text-sm cursor-pointer hover:bg-hover">
+              로그인 및 회원가입
+            </div>
+          </Link>
+        </div>
+      )}
     </div>
   );
 };

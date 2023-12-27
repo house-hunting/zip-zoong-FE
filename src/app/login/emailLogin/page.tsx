@@ -29,6 +29,16 @@ type FormData = {
   password: string;
 };
 
+type Res = {
+  id?: string;
+  email: string;
+  nickname?: string;
+  password: string;
+  confirmPW?: string;
+  provider?: string;
+  img?: string;
+};
+
 export default function Login() {
   const router = useRouter();
 
@@ -38,9 +48,33 @@ export default function Login() {
     formState: { errors },
   } = useForm<FormData>({ resolver: yupResolver(LoginSchema) });
 
-  const onSubmit = (data) => {
-    alert(JSON.stringify(data));
+  const onSubmit = async (data: Res) => {
     console.log(data);
+
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!res.ok) {
+        throw new Error("로그인에 실패하셨습니다");
+      }
+      if (res.ok) {
+        router.push("/");
+      }
+
+      const resData = await res.json();
+      // setLogin(resData);
+      localStorage.setItem("userId", JSON.stringify(resData));
+
+      console.log(resData);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleClick = () => {

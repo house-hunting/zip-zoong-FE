@@ -4,6 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { SignUpInput } from "./_components/signUpInput";
+import { useRouter } from "next/navigation";
 
 const SignUpSchema = yup.object().shape({
   email: yup
@@ -26,6 +27,8 @@ const SignUpSchema = yup.object().shape({
 });
 
 export default function SignUp() {
+  const router = useRouter();
+
   type FormData = {
     email: string;
     password: string;
@@ -39,9 +42,6 @@ export default function SignUp() {
   } = useForm<FormData>({ resolver: yupResolver(SignUpSchema) });
 
   const onSubmit = async (data: FormData) => {
-    alert(JSON.stringify(data));
-    console.log(data);
-
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/auth/join`, {
         method: "POST",
@@ -54,8 +54,13 @@ export default function SignUp() {
       if (!res.ok) {
         throw new Error("회원가입에 실패하셨습니다");
       }
+      if (res.ok) {
+        router.push("/login/emailLogin");
+      }
 
-      // const resData = res.json();
+      const resData = res.json();
+
+      console.log(resData);
     } catch (error) {
       console.error(error);
     }

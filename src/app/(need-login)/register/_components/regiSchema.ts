@@ -20,5 +20,7 @@ export const RegisterSchema = yup.object().shape({
   parkingCost: yup.number().required("주차비를 입력해주세요").typeError("숫자로 입력해주세요."),
   title: yup.string().required("제목은 필수입니다"),
   textArea: yup.string().required("내용은 필수로 적어주세요"),
+
+  datePicker: yup.date().required("날짜를 필수로 입력해주세요"),
 });
 export type RegiFormDatas = yup.InferType<typeof RegisterSchema>;

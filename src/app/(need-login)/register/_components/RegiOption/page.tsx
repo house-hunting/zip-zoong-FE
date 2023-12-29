@@ -8,17 +8,6 @@ import { Control, FieldErrors } from "react-hook-form";
 import { RegiFormDatas } from "../regiSchema";
 import { InputForm } from "../FormFields/inputForm";
 
-type FormData = {
-  roomType?: string;
-  roomInfo?: string;
-  cost?: string;
-  selectDate?: string;
-  elevator?: string;
-  parking?: string;
-  // totalFloors?: string;
-  // floorsNumber?: string;
-};
-
 type OptionProps = {
   control: Control<RegiFormDatas>;
   errors: FieldErrors<RegiFormDatas>;
@@ -52,7 +41,7 @@ export const RegiOption: React.FC<OptionProps> = ({ control, errors }) => {
           </RadioGroup>
         </div>
         <div className="flex justify-center items-center">
-          <DatePicker />
+          <DatePicker name={"datePicker"} control={control} errors={errors} />
         </div>
       </div>
       {/*  */}

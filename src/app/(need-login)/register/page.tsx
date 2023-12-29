@@ -22,7 +22,7 @@ export default function Register() {
     formState: { errors },
   } = useForm<RegiFormDatas>({ resolver: yupResolver(RegisterSchema) });
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: RegiFormDatas) => {
     alert(JSON.stringify(data));
     console.log(data);
   };

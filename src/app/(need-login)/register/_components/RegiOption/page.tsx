@@ -1,5 +1,4 @@
 import { DatePicker } from "@/components/DatePicker/DatePicker";
-import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup } from "@/components/ui/radio-group";
 import { RadioForm } from "../FormFields/radioForm";
 import { SelectForm } from "../FormFields/selectForm/selectForm";
@@ -135,66 +134,6 @@ export const RegiOption: React.FC<OptionProps> = ({ control, errors }) => {
                   placeholder="0"
                   label="만원"
                 />
-              </div>
-            </div>
-          </div>
-          {/*  */}
-          <div className="grid p-3 border-t">
-            <span className="font-semibold">옵션</span>
-            <div className="flex justify-around items-center space-x-2">
-              <div>
-                <Checkbox id="terms" />
-                <label
-                  htmlFor="terms"
-                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                >
-                  냉장고
-                </label>
-              </div>
-              <div>
-                <Checkbox id="terms" />
-                <label
-                  htmlFor="terms"
-                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                >
-                  세탁기
-                </label>
-              </div>
-              <div>
-                <Checkbox id="terms" />
-                <label
-                  htmlFor="terms"
-                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                >
-                  에어컨
-                </label>
-              </div>
-              <div>
-                <Checkbox id="terms" />
-                <label
-                  htmlFor="terms"
-                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                >
-                  전자레인지
-                </label>
-              </div>
-              <div>
-                <Checkbox id="terms" />
-                <label
-                  htmlFor="terms"
-                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                >
-                  옷장
-                </label>
-              </div>
-              <div>
-                <Checkbox id="terms" />
-                <label
-                  htmlFor="terms"
-                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                >
-                  책상
-                </label>
               </div>
             </div>
           </div>

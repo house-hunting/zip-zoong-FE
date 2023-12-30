@@ -1,7 +1,6 @@
 "use client";
 
 import { RadioGroup } from "@/components/ui/radio-group";
-import UploadFile from "./_components/UploadFile/page";
 import { Header } from "@/components/Header/Header";
 import FindAddress from "@/components/Address/Address";
 import { useState } from "react";
@@ -11,6 +10,7 @@ import { RegiFormDatas, RegisterSchema } from "./_components/regiSchema";
 import { RadioForm } from "./_components/FormFields/radioForm";
 import { RegiOption } from "./_components/RegiOption/page";
 import { InputForm } from "./_components/FormFields/inputForm";
+import { UploadFile } from "./_components/UploadFile/page";
 
 export default function Register() {
   const [address, setAddress] = useState("");
@@ -246,7 +246,7 @@ export default function Register() {
             </div>
             {/*  */}
             <RegiOption control={control} errors={errors} />
-            <UploadFile />
+            <UploadFile register={register} errors={errors} />
             {/*  */}
             <div className="grid grid-cols-6 justify-between">
               <div className="flex justify-center items-center border">
@@ -267,9 +267,7 @@ export default function Register() {
                 <textarea
                   className="w-full border rounded-md p-3 h-60"
                   placeholder="매물 상세 페이지에 노출되는 문구입니다. 1000자 이내로 작성해 주세요."
-                  {...register("textArea", {
-                    required: "본문 내용은 필수 사항입니다.",
-                  })}
+                  {...register("textArea")}
                 ></textarea>
                 {errors.textArea && (
                   <div className="text-font-error text-xs">{errors.textArea.message}</div>

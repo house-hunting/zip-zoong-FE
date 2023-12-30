@@ -22,5 +22,6 @@ export const RegisterSchema = yup.object().shape({
   textArea: yup.string().required("내용은 필수로 적어주세요"),
 
   datePicker: yup.date().required("날짜를 필수로 입력해주세요"),
+  roomImage: yup.string().url("잘못된 이미지 URL 형식입니다").required("사진을 올려주세요"),
 });
 export type RegiFormDatas = yup.InferType<typeof RegisterSchema>;

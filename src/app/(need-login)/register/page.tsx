@@ -4,7 +4,7 @@ import { RadioGroup } from "@/components/ui/radio-group";
 import { Header } from "@/components/Header/Header";
 import FindAddress from "@/components/Address/Address";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { RegiFormDatas, RegisterSchema } from "./_components/regiSchema";
 import { RadioForm } from "./_components/FormFields/radioForm";
@@ -13,8 +13,8 @@ import { InputForm } from "./_components/FormFields/inputForm";
 import { UploadFile } from "./_components/UploadFile/page";
 
 export default function Register() {
-  const [address, setAddress] = useState("");
-
+  const [address, setAddress] = useState<string>("");
+  const [uploadImages, setUploadImages] = useState<string[]>([]);
   const {
     handleSubmit,
     control,
@@ -22,10 +22,31 @@ export default function Register() {
     formState: { errors },
   } = useForm<RegiFormDatas>({ resolver: yupResolver(RegisterSchema) });
 
-  const onSubmit = (data: RegiFormDatas) => {
+  const onSubmit = async (data: RegiFormDatas) => {
     alert(JSON.stringify(data));
     console.log(data);
+
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/board/uploadBoard`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!res.ok) {
+        throw new Error("Image upload failed");
+      }
+
+      const result = await res.json();
+
+      setUploadImages(result.imageUrls);
+    } catch (error) {
+      console.error(error);
+    }
   };
+
   return (
     <>
       <Header />
@@ -76,18 +97,37 @@ export default function Register() {
               </div>
               <div className="col-span-3 p-3">
                 <span className="font-semibold">주소 검색</span>
-                <div className="flex my-3 ">
-                  <InputForm
+                <div className="flex mt-3">
+                  <Controller
                     name="address"
                     control={control}
-                    style="border text-sm p-2 rounded-md w-2/3"
-                    placeholder="예) 000동 00-0, 00구 00동"
-                    value={address}
+                    render={({ field }) => (
+                      <>
+                        <input
+                          {...field}
+                          className="border text-sm p-2 rounded-md w-2/3"
+                          placeholder="예) 000동 00-0, 00구 00동"
+                          readOnly
+                          type="text"
+                          value={address}
+                        />
+                        <FindAddress
+                          setter={(newAddress) => {
+                            setAddress(newAddress);
+                            field.onChange(newAddress);
+                          }}
+                        />
+                      </>
+                    )}
                   />
-                  <FindAddress setter={setAddress} />
                 </div>
+                {errors.address && (
+                  <div className="text-font-error text-xs flex flex-col mb-3">
+                    {errors.address.message}
+                  </div>
+                )}
                 <InputForm
-                  name="address"
+                  name="addressDetail"
                   control={control}
                   errors={errors}
                   style="border text-sm p-2 rounded-md w-2/3"

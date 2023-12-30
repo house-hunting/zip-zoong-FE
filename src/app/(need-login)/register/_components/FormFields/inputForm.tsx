@@ -5,6 +5,7 @@ import { RegiFormDatas } from "../regiSchema";
 
 type FormData = {
   address: string;
+  addressDetail: string;
   roomArea: number;
   deposit: number;
   month: number;
@@ -18,7 +19,6 @@ interface InputProps {
   name: keyof FormData;
   style: string;
   label?: string;
-  value?: string;
   control: Control<RegiFormDatas>;
   errors?: FieldErrors<FormData>;
   placeholder: string;
@@ -30,7 +30,6 @@ export const InputForm: React.FC<InputProps> = ({
   control,
   label,
   style,
-  value,
   errors,
   ...children
 }) => {
@@ -40,7 +39,7 @@ export const InputForm: React.FC<InputProps> = ({
         <Controller
           name={name}
           control={control}
-          render={({ field }) => <input className={style} {...field} {...children} value={value} />}
+          render={({ field }) => <input className={style} {...field} {...children} />}
         />
         {label && <span className="ml-2">{label}</span>}
       </>

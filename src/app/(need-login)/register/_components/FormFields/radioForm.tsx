@@ -10,7 +10,7 @@ type FormData = {
   roomInfo?: string;
   cost?: string;
   rentType?: string;
-  selectDate?: string;
+  selectDate?: boolean;
   elevator?: string;
   parking?: string;
 };
@@ -19,7 +19,7 @@ interface InputProps {
   name: keyof FormData;
   style: string;
   label: string;
-  value: string;
+  value: string | boolean;
   control: Control<RegiFormDatas>;
   errors: FieldErrors<FormData>;
   children?: ReactNode;
@@ -42,7 +42,7 @@ export const RadioForm: React.FC<InputProps> = ({
           control={control}
           render={({ field }) => (
             <div className={style} {...field} {...children}>
-              <RadioGroupItem className="text-primary-100" value={value} />
+              <RadioGroupItem className="text-primary-100" value={value as string & boolean} />
               <Label htmlFor="r1">{label}</Label>
             </div>
           )}

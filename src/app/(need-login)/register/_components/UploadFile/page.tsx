@@ -13,8 +13,10 @@ interface UploadImagesType {
 type OptionProps = {
   register: UseFormRegister<RegiFormDatas>;
   errors: FieldErrors<RegiFormDatas>;
+  setImages: React.Dispatch<React.SetStateAction<string[]>>;
 };
-export const UploadFile: React.FC<OptionProps> = ({ register, errors }) => {
+
+export const UploadFile: React.FC<OptionProps> = ({ register, errors, setImages }) => {
   const [uploadImages, setUploadImages] = useState<UploadImagesType>({
     imageFiles: [],
     blob: [],
@@ -27,9 +29,10 @@ export const UploadFile: React.FC<OptionProps> = ({ register, errors }) => {
   }, [uploadImages]);
 
   const onImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files) return; // a
-    const files: FileList = e.target.files;
+    setImages([]);
+    if (!e.target.files) return;
 
+    const files: FileList = e.target.files;
     const imageBlobs = [...uploadImages.blob];
     const imageFile = Array.from(files).map((file) => {
       const imageUrl = window.URL.createObjectURL(file);
@@ -50,6 +53,7 @@ export const UploadFile: React.FC<OptionProps> = ({ register, errors }) => {
           <input
             type="file"
             id="fileInput"
+            multiple
             style={{ display: "none" }}
             accept="image/*"
             {...register("roomImage")}

@@ -14,7 +14,8 @@ import { UploadFile } from "./_components/UploadFile/page";
 
 export default function Register() {
   const [address, setAddress] = useState<string>("");
-  const [uploadImages, setUploadImages] = useState<string[]>([]);
+  const [images, setImages] = useState<string[]>([]);
+
   const {
     handleSubmit,
     control,
@@ -26,22 +27,51 @@ export default function Register() {
     alert(JSON.stringify(data));
     console.log(data);
 
+    const formData = new FormData();
+    formData.append("roomType", data.roomType);
+    formData.append("address", data.address);
+    formData.append("addressDetail", data.addressDetail);
+    formData.append("roomArea", data.roomArea.toString());
+    formData.append("roomInfo", data.roomInfo);
+
+    formData.append("rentType", data.rentType);
+    formData.append("deposit", data.deposit.toString());
+    formData.append("month", data.month.toString());
+    formData.append("cost", data.cost.toString());
+    formData.append("roomCost", data.roomCost.toString());
+
+    formData.append("selectDate", data.selectDate.toString());
+    formData.append("datePicker", data.datePicker.toString());
+
+    formData.append("totalFloors", data.totalFloors);
+    formData.append("floorsNumber", data.floorsNumber);
+
+    formData.append("elevator", data.elevator.toString());
+    formData.append("parking", data.parking.toString());
+    formData.append("parkingCost", data.parkingCost.toString());
+
+    // formData.append("roomImage", data.roomImage);
+    [data.roomImage].forEach((element) => {
+      formData.append("images", element);
+    });
+
+    formData.append("title", data.title);
+    formData.append("textArea", data.textArea);
+
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/board/uploadBoard`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "multipart/form-data",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(formData),
       });
 
       if (!res.ok) {
-        throw new Error("Image upload failed");
+        throw new Error("게시글 업로드에 실패하셨습니다");
       }
 
       const result = await res.json();
-
-      setUploadImages(result.imageUrls);
     } catch (error) {
       console.error(error);
     }
@@ -74,7 +104,7 @@ export default function Register() {
               >
                 <RadioForm
                   name="roomType"
-                  value="1"
+                  value="one"
                   style="flex justify-around items-center col-span-5 h-16"
                   label="원룸"
                   control={control}
@@ -82,7 +112,7 @@ export default function Register() {
                 />
                 <RadioForm
                   name="roomType"
-                  value="2"
+                  value="two"
                   style="flex justify-around items-center col-span-5 h-16"
                   label="투룸"
                   control={control}
@@ -160,7 +190,7 @@ export default function Register() {
                 >
                   <RadioForm
                     name="roomInfo"
-                    value="1"
+                    value="open"
                     style="flex items-center space-x-2 mx-8"
                     label="오픈형"
                     control={control}
@@ -168,7 +198,7 @@ export default function Register() {
                   />
                   <RadioForm
                     name="roomInfo"
-                    value="2"
+                    value="detachable"
                     style="flex items-center space-x-2 mx-8"
                     label="분리형"
                     control={control}
@@ -176,7 +206,7 @@ export default function Register() {
                   />
                   <RadioForm
                     name="roomInfo"
-                    value="3"
+                    value="layerd"
                     style="flex items-center space-x-2 mx-8"
                     label="복층형"
                     control={control}
@@ -196,7 +226,7 @@ export default function Register() {
               >
                 <RadioForm
                   name="rentType"
-                  value="1"
+                  value="month"
                   style="flex items-center space-x-2 mr-12"
                   label="월세"
                   control={control}
@@ -204,7 +234,7 @@ export default function Register() {
                 />
                 <RadioForm
                   name="rentType"
-                  value="2"
+                  value="year"
                   style="flex items-center space-x-2 mr-12"
                   label="전세"
                   control={control}
@@ -255,7 +285,7 @@ export default function Register() {
                     >
                       <RadioForm
                         name="cost"
-                        value="1"
+                        value={false}
                         style="flex items-center space-x-2 mr-12"
                         label="없음"
                         control={control}
@@ -263,7 +293,7 @@ export default function Register() {
                       />
                       <RadioForm
                         name="cost"
-                        value="2"
+                        value={true}
                         style="flex items-center space-x-2"
                         label="있음"
                         control={control}
@@ -286,7 +316,7 @@ export default function Register() {
             </div>
             {/*  */}
             <RegiOption control={control} errors={errors} />
-            <UploadFile register={register} errors={errors} />
+            <UploadFile register={register} errors={errors} setImages={setImages} />
             {/*  */}
             <div className="grid grid-cols-6 justify-between">
               <div className="flex justify-center items-center border">

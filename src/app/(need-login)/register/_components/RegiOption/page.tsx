@@ -23,7 +23,7 @@ export const RegiOption: React.FC<OptionProps> = ({ control, errors }) => {
           <RadioGroup className="flex items-center col-span-3 h-16 mx-3" defaultValue="comfortable">
             <RadioForm
               name="selectDate"
-              value="1"
+              value={false}
               style="flex items-center space-x-2 mr-12"
               label="즉시 입주"
               control={control}
@@ -31,7 +31,7 @@ export const RegiOption: React.FC<OptionProps> = ({ control, errors }) => {
             />
             <RadioForm
               name="selectDate"
-              value="2"
+              value={true}
               style="flex items-center space-x-2"
               label="일자 선택"
               control={control}
@@ -87,7 +87,7 @@ export const RegiOption: React.FC<OptionProps> = ({ control, errors }) => {
             >
               <RadioForm
                 name="elevator"
-                value="1"
+                value={false}
                 style="flex items-center space-x-2 mr-12"
                 label="없음"
                 control={control}
@@ -95,7 +95,7 @@ export const RegiOption: React.FC<OptionProps> = ({ control, errors }) => {
               />
               <RadioForm
                 name="elevator"
-                value="2"
+                value={true}
                 style="flex items-center space-x-2"
                 label="있음"
                 control={control}
@@ -110,7 +110,7 @@ export const RegiOption: React.FC<OptionProps> = ({ control, errors }) => {
               <RadioGroup className="flex items-center h-16 mx-3" defaultValue="comfortable">
                 <RadioForm
                   name="parking"
-                  value="1"
+                  value={false}
                   style="flex items-center space-x-2 w-24"
                   label="불가능"
                   control={control}
@@ -118,7 +118,7 @@ export const RegiOption: React.FC<OptionProps> = ({ control, errors }) => {
                 />
                 <RadioForm
                   name="parking"
-                  value="2"
+                  value={true}
                   style="flex items-center space-x-2 w-24"
                   label="가능"
                   control={control}

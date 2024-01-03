@@ -1,76 +1,68 @@
 "use client";
 
 import Image from "next/image";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent } from "react";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 import { RegiFormDatas } from "../regiSchema";
-
-interface UploadImagesType {
-  imageFiles: File[];
-  blob: string[];
-}
+import { UploadImagesType } from "../../page";
 
 type OptionProps = {
   register: UseFormRegister<RegiFormDatas>;
   errors: FieldErrors<RegiFormDatas>;
-  setImages: React.Dispatch<React.SetStateAction<string[]>>;
+  setImages: React.Dispatch<React.SetStateAction<UploadImagesType>>;
+  images: UploadImagesType;
 };
 
-export const UploadFile: React.FC<OptionProps> = ({ register, errors, setImages }) => {
-  const [uploadImages, setUploadImages] = useState<UploadImagesType>({
-    imageFiles: [],
-    blob: [],
-  });
-
-  useEffect(() => {
-    return () => {
-      uploadImages.blob.forEach((url) => URL.revokeObjectURL(url));
-    };
-  }, [uploadImages]);
-
+export const UploadFile: React.FC<OptionProps> = ({ register, errors, setImages, images }) => {
   const onImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
-    setImages([]);
     if (!e.target.files) return;
+    const files = e.target.files;
+    const fileArray = Array.from(files);
 
-    const files: FileList = e.target.files;
-    const imageBlobs = [...uploadImages.blob];
-    const imageFile = Array.from(files).map((file) => {
-      const imageUrl = window.URL.createObjectURL(file);
-      imageBlobs.unshift(imageUrl);
-      return file; //file 데이터
+    //c
+    const newImages = Array.from(files, (file) => URL.createObjectURL(file));
+    setImages({
+      imageFiles: [...images.imageFiles, ...fileArray],
+      blob: [...images.blob, ...newImages],
     });
-
-    setUploadImages({ imageFiles: imageFile, blob: imageBlobs });
   };
+
+  console.log(images);
   return (
     <div className="border-y border-b-black grid grid-cols-6 justify-between">
       <div className="flex justify-center items-center border">
-        <div className="font-bold">사진 등록</div>
+        <div className="font-bold text-sm xs:text-sm sm:text-base">사진 등록</div>
       </div>
       <div className="col-span-2 p-5">
-        <label htmlFor="fileInput" className="cursor-pointer p-2 rounded-md bg-black text-white">
+        <label htmlFor="roomImage" className="cursor-pointer p-2 rounded-md bg-black text-white">
           + 사진 추가
           <input
             type="file"
-            id="fileInput"
+            id="roomImage"
             multiple
             style={{ display: "none" }}
             accept="image/*"
             {...register("roomImage")}
-            onChange={onImageUpload}
+            onChange={(e) => {
+              register("roomImage").onChange(e);
+              onImageUpload(e);
+            }}
           />
         </label>
         {errors.roomImage && (
           <div className="text-font-error text-xs mt-5">{errors.roomImage.message}</div>
         )}
-        {uploadImages.blob.map((imageUrl, index) => (
-          <Image
-            key={index}
-            src={imageUrl}
-            alt={`Image ${index + 1}`}
-            // style={{ maxWidth: "100px", maxHeight: "100px", margin: "5px" }}
-            className=" w-16 h-16"
-          />
+        {images?.blob.map((imageUrl, index) => (
+          <div key={index} className="bg-red-400 ">
+            <Image
+              id="roomImage"
+              key={index}
+              src={imageUrl}
+              alt={`Image ${index + 1}`}
+              width={500}
+              height={500}
+            />
+          </div>
         ))}
       </div>
       <div className="flex justify-center items-center"></div>

@@ -11,6 +11,8 @@ module.exports = {
     container: {
       center: true,
       padding: "2rem",
+    },
+    extend: {
       screens: {
         xs: "500px",
         sm: "640px",
@@ -19,8 +21,6 @@ module.exports = {
         xl: "1280px",
         "2xl": "1400px",
       },
-    },
-    extend: {
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

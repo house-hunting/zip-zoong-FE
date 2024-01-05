@@ -17,36 +17,41 @@ export const RegiOption: React.FC<OptionProps> = ({ control, errors }) => {
     <>
       <div className="grid grid-cols-6 justify-between">
         <div className="flex justify-center items-center border">
-          <div className="font-bold">입주 가능 일자</div>
+          <div className="font-bold text-sm xs:text-sm sm:text-base">입주 가능 일자</div>
         </div>
-        <div className="col-span-2 p-3">
-          <RadioGroup className="flex items-center col-span-3 h-16 mx-3" defaultValue="comfortable">
-            <RadioForm
-              name="selectDate"
-              value={false}
-              style="flex items-center space-x-2 mr-12"
-              label="즉시 입주"
-              control={control}
-              errors={errors}
-            />
-            <RadioForm
-              name="selectDate"
-              value={true}
-              style="flex items-center space-x-2"
-              label="일자 선택"
-              control={control}
-              errors={errors}
-            />
-          </RadioGroup>
-        </div>
-        <div className="flex justify-center items-center">
-          <DatePicker name={"datePicker"} control={control} errors={errors} />
+        <div className="flex flex-col sm:flex-row">
+          <div className="col-span-2 p-3">
+            <RadioGroup
+              className="flex items-center col-span-3 h-16 mx-3"
+              defaultValue="comfortable"
+            >
+              <RadioForm
+                name="selectDate"
+                value={false}
+                style="flex items-center space-x-2 mr-10 w-24"
+                label="즉시 입주"
+                control={control}
+                errors={errors}
+              />
+              <RadioForm
+                name="selectDate"
+                value={true}
+                style="flex items-center space-x-2 w-24"
+                label="일자 선택"
+                control={control}
+                errors={errors}
+              />
+            </RadioGroup>
+          </div>
+          <div className="flex justify-center items-center md:ml-8 ml-24 mb-5 sm:mb-0">
+            <DatePicker name={"datePicker"} control={control} errors={errors} />
+          </div>
         </div>
       </div>
       {/*  */}
       <div className="border-t grid grid-cols-6 justify-between">
         <div className="flex justify-center items-center border">
-          <div className="font-bold">층 수</div>
+          <div className="font-bold text-sm xs:text-sm sm:text-base">층 수</div>
         </div>
         <div className="col-span-3 p-3">
           <div className="flex">
@@ -76,11 +81,11 @@ export const RegiOption: React.FC<OptionProps> = ({ control, errors }) => {
       {/*  */}
       <div className="border-y border-b-black grid grid-cols-6 justify-between">
         <div className="flex justify-center items-center border ">
-          <div className="font-bold">추가 정보</div>
+          <div className="font-bold text-sm xs:text-sm sm:text-base">추가 정보</div>
         </div>
         <div className="w-full col-start-2 col-end-7">
           <div className="grid p-3">
-            <span className="font-semibold">엘리베이터</span>
+            <span className="font-semibold text-sm xs:text-sm sm:text-base">엘리베이터</span>
             <RadioGroup
               className="flex items-center col-span-3 h-16 mx-3"
               defaultValue="comfortable"
@@ -105,8 +110,8 @@ export const RegiOption: React.FC<OptionProps> = ({ control, errors }) => {
           </div>
           {/*  */}
           <div className="grid justify-between border-t p-3">
-            <span className="font-semibold">주차 가능 여부</span>
-            <div className="flex">
+            <span className="font-semibold text-sm xs:text-sm sm:text-base">주차 가능 여부</span>
+            <div className="flex flex-col sm:flex-row items-center">
               <RadioGroup className="flex items-center h-16 mx-3" defaultValue="comfortable">
                 <RadioForm
                   name="parking"
@@ -125,12 +130,12 @@ export const RegiOption: React.FC<OptionProps> = ({ control, errors }) => {
                   errors={errors}
                 />
               </RadioGroup>
-              <div className="ml-14">
+              <div className="md:ml-14">
                 <InputForm
                   name="parkingCost"
                   control={control}
                   errors={errors}
-                  style="border p-2 rounded-md text-end"
+                  style="border p-2 text-xs xs:text-sm rounded-md text-end"
                   placeholder="0"
                   label="만원"
                 />

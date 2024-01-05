@@ -88,7 +88,7 @@ export default function Register() {
     <>
       <Header />
       <form
-        className="flex justify-center items-center flex-col sm:p-20 "
+        className="flex justify-center items-center flex-col md:p-20 mb-20"
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className="font-bold text-big m-20">내집 내놓기</div>
@@ -99,7 +99,7 @@ export default function Register() {
           <li>본인 명의로 계약 된 집이 아닌경우 계약 명의자의 출석이 요구될 수 있습니다.</li>
           <li>금액 및 옵션 등 정확한 정보를 입력 바랍니다.</li>
         </ul>
-        <div className="border flex justify-center items-center flex-col  mt-5 lg:w-5/6 xl:w-4/6 md:w-5/6 w-11/12">
+        <div className="border flex justify-center items-center flex-col mt-5 w-11/12 lg:w-5/6 xl:w-4/6">
           <div className="flex flex-col w-full">
             <div className="grid grid-cols-6 justify-between">
               <div className="flex justify-center items-center border ">
@@ -192,13 +192,13 @@ export default function Register() {
                   </div>
                 </div>
                 <RadioGroup
-                  className="flex justify-center items-center w-3/4"
+                  className="flex sm:justify-center col-span-3 items-center w-full sm:w-3/4"
                   defaultValue="comfortable"
                 >
                   <RadioForm
                     name="roomInfo"
                     value="open"
-                    style="flex items-center space-x-2 mx-8"
+                    style="flex items-center space-x-2 mx-4 sm:mx-8 w-3/4"
                     label="오픈형"
                     control={control}
                     errors={errors}
@@ -206,7 +206,7 @@ export default function Register() {
                   <RadioForm
                     name="roomInfo"
                     value="detachable"
-                    style="flex items-center space-x-2 mx-8"
+                    style="flex items-center space-x-2 mx-4 sm:mx-8 w-3/4"
                     label="분리형"
                     control={control}
                     errors={errors}
@@ -214,7 +214,7 @@ export default function Register() {
                   <RadioForm
                     name="roomInfo"
                     value="layerd"
-                    style="flex items-center space-x-2 mx-8"
+                    style="flex items-center space-x-2 mx-4 sm:mx-8 w-3/4"
                     label="복층형"
                     control={control}
                     errors={errors}
@@ -234,7 +234,7 @@ export default function Register() {
                 <RadioForm
                   name="rentType"
                   value="month"
-                  style="flex items-center space-x-2 mr-12"
+                  style="flex items-center space-x-2 xs:mr-12 w-20"
                   label="월세"
                   control={control}
                   errors={errors}
@@ -242,7 +242,7 @@ export default function Register() {
                 <RadioForm
                   name="rentType"
                   value="year"
-                  style="flex items-center space-x-2 mr-12"
+                  style="flex items-center space-x-2 w-20"
                   label="전세"
                   control={control}
                   errors={errors}
@@ -258,12 +258,12 @@ export default function Register() {
                 <div className="flex">
                   <div className="mr-5">
                     <span className="font-semibold text-sm xs:text-sm sm:text-base">보증금</span>
-                    <div className="my-3">
+                    <div className="my-3 flex items-center">
                       <InputForm
                         name="deposit"
                         control={control}
                         errors={errors}
-                        style="border p-2 rounded-md text-end"
+                        style="border p-2 text-xs xs:text-sm rounded-md text-end w-24 xs:w-32 sm:w-auto"
                         placeholder="0"
                         label="만원"
                       />
@@ -271,12 +271,12 @@ export default function Register() {
                   </div>
                   <div>
                     <span className="font-semibold text-sm xs:text-sm sm:text-base">월세</span>
-                    <div className="my-3">
+                    <div className="my-3 flex items-center">
                       <InputForm
                         name="month"
                         control={control}
                         errors={errors}
-                        style="border p-2 rounded-md text-end"
+                        style="border p-2 text-xs xs:text-sm rounded-md text-end w-24 xs:w-32 sm:w-auto"
                         placeholder="0"
                         label="만원"
                       />
@@ -285,7 +285,7 @@ export default function Register() {
                 </div>
                 <div>
                   <span className="font-semibold text-sm xs:text-sm sm:text-base">관리비 여부</span>
-                  <div className="flex">
+                  <div className="flex flex-col sm:flex-row">
                     <RadioGroup
                       className="flex items-center col-span-3 h-16 mx-3"
                       defaultValue="comfortable"
@@ -293,7 +293,7 @@ export default function Register() {
                       <RadioForm
                         name="cost"
                         value={false}
-                        style="flex items-center space-x-2 mr-12"
+                        style="flex items-center space-x-2 xs:mr-10 w-20"
                         label="없음"
                         control={control}
                         errors={errors}
@@ -301,18 +301,18 @@ export default function Register() {
                       <RadioForm
                         name="cost"
                         value={true}
-                        style="flex items-center space-x-2"
+                        style="flex items-center space-x-2 w-20"
                         label="있음"
                         control={control}
                         errors={errors}
                       />
                     </RadioGroup>
-                    <div className="ml-20">
+                    <div className="md:ml-18 lg:ml-20 flex items-center">
                       <InputForm
                         name="roomCost"
                         control={control}
                         errors={errors}
-                        style="border p-2 rounded-md text-end"
+                        style="border p-2 text-xs xs:text-sm rounded-md text-end"
                         placeholder="0"
                         label="만원"
                       />
@@ -336,13 +336,13 @@ export default function Register() {
                     name="title"
                     control={control}
                     errors={errors}
-                    style="border text-sm p-3 rounded-md w-2/3 mb-2"
+                    style="border text-xs xs:text-sm p-3 rounded-md w-full md:w-2/3 mb-2"
                     placeholder="리스트에 노출되는 문구입니다. 40자 이내로 작성해 주세요."
                   />
                 </div>
                 <span className="font-semibold text-sm xs:text-sm sm:text-base">내용</span>
                 <textarea
-                  className="w-full border rounded-md p-3 h-60"
+                  className="w-full border rounded-md p-3 h-60 text-xs xs:text-sm"
                   placeholder="매물 상세 페이지에 노출되는 문구입니다. 1000자 이내로 작성해 주세요."
                   {...register("textArea")}
                 ></textarea>
@@ -354,7 +354,7 @@ export default function Register() {
             {/*  */}
           </div>
         </div>
-        <button className="mt-5 bg-primary-200 text-white w-48 h-12 rounded-md font-semibold hover:bg-hover">
+        <button className="mt-5 bg-primary-200 text-sm xs:text-base text-white w-36 md:w-48 h-12 rounded-md font-semibold hover:bg-hover">
           매물 등록
         </button>
       </form>

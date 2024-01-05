@@ -34,7 +34,10 @@ export const UploadFile: React.FC<OptionProps> = ({ register, errors, setImages,
         <div className="font-bold text-sm xs:text-sm sm:text-base">사진 등록</div>
       </div>
       <div className="col-span-2 p-5">
-        <label htmlFor="roomImage" className="cursor-pointer p-2 rounded-md bg-black text-white">
+        <label
+          htmlFor="roomImage"
+          className="cursor-pointer p-2 rounded-md bg-black text-white text-xs xs:text-sm"
+        >
           + 사진 추가
           <input
             type="file"

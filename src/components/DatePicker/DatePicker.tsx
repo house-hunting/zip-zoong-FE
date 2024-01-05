@@ -35,7 +35,7 @@ export const DatePicker: React.FC<InputProps> = ({ name, control, errors, ...chi
               <Button
                 variant={"outline"}
                 className={cn(
-                  "w-[240px] pl-3 text-left font-normal",
+                  "w-36 lg:w-44 pl-3 text-left font-normal text-xs xs:text-sm",
                   !field.value && "text-muted-foreground"
                 )}
               >

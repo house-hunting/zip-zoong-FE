@@ -46,7 +46,7 @@ export const SelectForm: React.FC<InputProps> = ({
         control={control}
         render={({ field }) => (
           <>
-            <span className="font-semibold">{title}</span>
+            <span className="font-semibold text-sm sm:text-base">{title}</span>
             <div className="my-3">
               <Select
                 {...field}
@@ -54,7 +54,7 @@ export const SelectForm: React.FC<InputProps> = ({
                 onValueChange={field.onChange}
                 defaultValue={field.value}
               >
-                <SelectTrigger className="w-[180px]">
+                <SelectTrigger className="text-xs xs:text-sm w-28 xs:w-36">
                   <SelectValue placeholder={placeholder} />
                 </SelectTrigger>
                 <SelectContent>

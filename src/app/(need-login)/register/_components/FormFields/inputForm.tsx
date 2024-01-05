@@ -21,7 +21,7 @@ interface InputProps {
   label?: string;
   control: Control<RegiFormDatas>;
   errors?: FieldErrors<FormData>;
-  placeholder: string;
+  placeholder?: string;
   children?: ReactNode;
 }
 
@@ -41,7 +41,7 @@ export const InputForm: React.FC<InputProps> = ({
           control={control}
           render={({ field }) => <input className={style} {...field} {...children} />}
         />
-        {label && <span className="ml-2">{label}</span>}
+        {label && <span className="ml-2 text-xs xs:text-sm w-6 xs:w-9">{label}</span>}
       </>
 
       {errors && (

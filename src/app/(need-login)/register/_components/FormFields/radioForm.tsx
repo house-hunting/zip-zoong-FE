@@ -43,7 +43,9 @@ export const RadioForm: React.FC<InputProps> = ({
           render={({ field }) => (
             <div className={style} {...field} {...children}>
               <RadioGroupItem className="text-primary-100" value={value as string & boolean} />
-              <Label htmlFor="r1">{label}</Label>
+              <Label htmlFor="r1" className="text-xs xs:text-sm sm:text-base">
+                {label}
+              </Label>
             </div>
           )}
         />

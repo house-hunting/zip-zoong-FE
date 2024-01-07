@@ -1,7 +1,6 @@
 "use client";
 
 import { RadioGroup } from "@/components/ui/radio-group";
-import { Header } from "@/components/Header/Header";
 import FindAddress from "@/components/Address/Address";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -86,7 +85,6 @@ export default function Register() {
 
   return (
     <>
-      <Header />
       <form
         className="flex justify-center items-center flex-col md:p-20 mb-20"
         onSubmit={handleSubmit(onSubmit)}

@@ -1,4 +1,3 @@
-import { Header } from "@/components/Header/Header";
 import { Heart } from "@/components/Heart/Heart";
 import Image from "next/image";
 import roomImg from "/public/집중 배너.jpeg";
@@ -7,7 +6,6 @@ import { Contents, Option } from "./_components";
 export default function Detail() {
   return (
     <>
-      <Header />
       <div className="flex justify-center items-center pb-80">
         <div className="flex justify-center flex-col w-3/5">
           <div className="flex justify-center border-b border-gray-200 py-10">

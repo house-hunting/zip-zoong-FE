@@ -1,3 +1,9 @@
+import { Card } from "@/components/Card/Card";
+
 export default function MyPost() {
-  return <div>MyPost</div>;
+  return (
+    <div>
+      <Card />
+    </div>
+  );
 }

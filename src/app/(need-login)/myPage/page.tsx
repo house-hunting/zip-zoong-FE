@@ -7,9 +7,12 @@ import { RefObject, useRef } from "react";
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { MdArrowBackIosNew } from "react-icons/md";
+import { useRouter } from "next/navigation";
 
 export default function ProfileEdit() {
   const photoInput: RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
+  const router = useRouter();
 
   const handleClick = () => {
     if (photoInput.current) {
@@ -18,8 +21,11 @@ export default function ProfileEdit() {
   };
 
   return (
-    <form className="flex justify-center items-center flex-col p-20">
-      <div className="flex justify-center items-center flex-col w-3/2">
+    <form className="flex justify-center items-center flex-col xs:p-20">
+      <div className="flex w-full xs:hidden mb-6" onClick={() => router.back()}>
+        <MdArrowBackIosNew size={30} />
+      </div>
+      <div className="flex justify-center items-center flex-col xs:w-3/2 w-full">
         <div className="p-10 relative">
           <Image className=" w-48" src={ProfileImg} alt="profileImg" />
           <div className="bg-primary-200 flex justify-center items-center w-9 h-9 rounded-full absolute bottom-12 right-12 bot cursor-pointer">
@@ -53,7 +59,7 @@ export default function ProfileEdit() {
             </Label>
             <Input className="col-span-4" type="email" id="email" placeholder="Email" />
           </div>
-          <div className="flex justify-center items-center bg-primary-200 mt-32 w-11/12 h-10 rounded-md">
+          <div className="flex justify-center items-center bg-primary-200 mt-10 xs:mt-32 w-11/12 h-10 rounded-md">
             <button className="text-white">저장하기</button>
           </div>
         </div>

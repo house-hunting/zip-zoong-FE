@@ -9,7 +9,7 @@ export default function NeedLoginLayout({ children }: { children: React.ReactNod
   return (
     <>
       {userId ? (
-        <div className="relative">
+        <div className="">
           <Header />
           {children}
           <MobileFooter />

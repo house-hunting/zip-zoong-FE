@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { Inter } from "next/font/google";
-import { Header } from "@/components/Header/Header";
 import { usePathname } from "next/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -27,25 +26,23 @@ export default function MyPageLayout({ children }: { children: React.ReactNode }
   console.log(router);
 
   return (
-    <>
-      <Header />
-      <div className="flex justify-center items-center my-24">
-        <div className="flex border w-7/12">
-          <div className="flex flex-col w-56 border-r">
-            {data.map((el, idx) => (
-              <div className="py-5" key={idx}>
-                <Link
-                  className={`${router === el.address ? "border-primary-200 border-l-4 py-4" : ""}`}
-                  href={el.address}
-                >
-                  <span className="m-5 ">{el.title}</span>
-                </Link>
-              </div>
-            ))}
-          </div>
-          <div className={`w-full ${inter.className}`}>{children}</div>
+    <div className="flex justify-center items-center my-16 xs:my-24">
+      <div className="flex xs:border w-11/12 lg:w-7/12">
+        {/*  */}
+        <div className="hidden flex-col w-56 border-r xs:flex">
+          {data.map((el, idx) => (
+            <div className="py-5" key={idx}>
+              <Link
+                className={`${router === el.address ? "border-primary-200 border-l-4 py-4" : ""}`}
+                href={el.address}
+              >
+                <span className="m-5 ">{el.title}</span>
+              </Link>
+            </div>
+          ))}
         </div>
+        <div className={`w-full ${inter.className}`}>{children}</div>
       </div>
-    </>
+    </div>
   );
 }

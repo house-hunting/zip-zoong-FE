@@ -10,6 +10,8 @@ import { RadioForm } from "./_components/FormFields/radioForm";
 import { RegiOption } from "./_components/RegiOption/page";
 import { InputForm } from "./_components/FormFields/inputForm";
 import { UploadFile } from "./_components/UploadFile/page";
+import { MdArrowBackIosNew } from "react-icons/md";
+import { useRouter } from "next/navigation";
 
 export interface UploadImagesType {
   imageFiles: File[];
@@ -28,6 +30,7 @@ export default function Register() {
     register,
     formState: { errors },
   } = useForm<RegiFormDatas>({ resolver: yupResolver(RegisterSchema) });
+  const router = useRouter();
 
   const onSubmit = async (data: RegiFormDatas) => {
     alert(JSON.stringify(data));
@@ -89,6 +92,9 @@ export default function Register() {
         className="flex justify-center items-center flex-col md:p-20 mb-20"
         onSubmit={handleSubmit(onSubmit)}
       >
+        <div className="flex w-full xs:hidden pt-16 pl-6" onClick={() => router.back()}>
+          <MdArrowBackIosNew size={30} />
+        </div>
         <div className="font-bold text-big m-20">내집 내놓기</div>
         <ul className="list-disc flex flex-col lg:w-5/6 xl:w-4/6 md:w-5/6 w-11/12 sm:ml-10 font-semibold leading-8 ml-7 text-xs xs:text-base">
           <li>전/월세 매물만 등록할 수 있습니다.</li>

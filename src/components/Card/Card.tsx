@@ -7,7 +7,7 @@ import { Heart } from "../Heart/Heart";
 
 export const Card = () => {
   return (
-    <div className="flex justify-center w-72 p-5">
+    <div className="hidden xs:flex justify-center w-72 p-5">
       <div>
         <div className="relative">
           <Image className="h-72 rounded-md" src={listImg} alt="img" />

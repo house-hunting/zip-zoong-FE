@@ -1,10 +1,34 @@
+"use client";
+
 import Image from "next/image";
 import ProfileImg from "/public/기본 프로필 이미지.png";
 import { FaPen } from "react-icons/fa";
 import { FiInfo } from "react-icons/fi";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { LoginDataType } from "@/store/loginData.atoms";
 
 export default function MorePage() {
+  const [local, setLocal] = useState<LoginDataType | null>(null);
+
+  // useEffect(() => {
+  //   setUserId(localStorage.getItem("userId"));
+  // }, []);
+
+  useEffect(() => {
+    const userInfo = localStorage.getItem("userId");
+
+    if (userInfo) {
+      const userData: LoginDataType = JSON.parse(userInfo);
+      setLocal(userData);
+    }
+  }, []);
+
+  const logOut = async () => {
+    localStorage.removeItem("userId");
+    setLocal(null);
+  };
+
   return (
     <div className="flex justify-center items-center flex-col xs:hidden">
       <div className="font-bold">더보기</div>
@@ -22,7 +46,10 @@ export default function MorePage() {
           <span className="ml-3">내 정보</span>
         </Link>
       </div>
-      <button className="w-full h-12 mt-36 bg-primary-200 text-white font-bold hover:bg-hover">
+      <button
+        className="w-full h-12 mt-36 bg-primary-200 text-white font-bold hover:bg-hover"
+        onClick={logOut}
+      >
         로그아웃
       </button>
     </div>

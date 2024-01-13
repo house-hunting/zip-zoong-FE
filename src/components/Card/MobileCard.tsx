@@ -3,9 +3,9 @@ import listImg from "/public/집중 배너.jpeg";
 import { Heart } from "@/components/Heart/Heart";
 export const MobileCard = () => {
   return (
-    <div className="flex xs:hidden justify-center border-b py-7 w-full">
+    <div className="flex xs:hidden justify-center border-b w-full bg-red-300 h-30 p-2">
       <div className="flex w-56">
-        <Image className="h-32 w-full rounded-md" src={listImg} alt="img" />
+        <Image className=" h-full w-full rounded-md" src={listImg} alt="img" />
       </div>
       <div className="flex relative w-full flex-col pl-5 justify-center ">
         <div className="flex">

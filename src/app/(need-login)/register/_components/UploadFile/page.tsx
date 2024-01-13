@@ -33,42 +33,46 @@ export const UploadFile: React.FC<OptionProps> = ({ register, errors, setImages,
       <div className="flex justify-center items-center border">
         <div className="font-bold text-sm xs:text-sm sm:text-base">사진 등록</div>
       </div>
-      <div className="col-span-2 p-5">
-        <label
-          htmlFor="roomImage"
-          className="cursor-pointer p-2 rounded-md bg-black text-white text-xs xs:text-sm"
-        >
-          + 사진 추가
-          <input
-            type="file"
-            id="roomImage"
-            multiple
-            style={{ display: "none" }}
-            accept="image/*"
-            {...register("roomImage")}
-            onChange={(e) => {
-              register("roomImage").onChange(e);
-              onImageUpload(e);
-            }}
-          />
-        </label>
-        {errors.roomImage && (
-          <div className="text-font-error text-xs mt-5">{errors.roomImage.message}</div>
-        )}
-        {images?.blob.map((imageUrl, index) => (
-          <div key={index} className="bg-red-400 ">
-            <Image
+      <div className="flex flex-col col-span-5">
+        <div className="col-span-2 p-5">
+          <label
+            htmlFor="roomImage"
+            className="cursor-pointer p-2 rounded-md bg-black text-white text-xs xs:text-sm"
+          >
+            + 사진 추가
+            <input
+              type="file"
               id="roomImage"
-              key={index}
-              src={imageUrl}
-              alt={`Image ${index + 1}`}
-              width={500}
-              height={500}
+              multiple
+              style={{ display: "none" }}
+              accept="image/*"
+              {...register("roomImage")}
+              onChange={(e) => {
+                register("roomImage").onChange(e);
+                onImageUpload(e);
+              }}
             />
-          </div>
-        ))}
+          </label>
+          {errors.roomImage && (
+            <div className="text-font-error text-xs mt-5">{errors.roomImage.message}</div>
+          )}
+        </div>
+        <div className="mt-5 flex flex-wrap">
+          {images?.blob.map((imageUrl, index) => (
+            <div key={index} className="mr-2">
+              <Image
+                id="roomImage"
+                key={index}
+                src={imageUrl}
+                alt={`Image ${index + 1}`}
+                width={150}
+                height={150}
+                // style={{ objectFit: "fill" }}
+              />
+            </div>
+          ))}
+        </div>
       </div>
-      <div className="flex justify-center items-center"></div>
     </div>
   );
 };

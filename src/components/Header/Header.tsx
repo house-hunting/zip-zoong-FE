@@ -14,12 +14,12 @@ const nav = [
   {
     title: "원룸",
     subTitle: "전월세",
-    address: "/",
+    address: "/room/OneRoom",
   },
   {
     title: "투룸",
     subTitle: "전월세",
-    address: "/",
+    address: "/room/TwoRoom",
   },
   {
     title: "내집 내놓기",
@@ -87,7 +87,7 @@ export const Header: React.FC = () => {
             {drop ? <IoIosArrowDown size={20} /> : <IoIosArrowUp size={20} />}
           </div>
           {drop && (
-            <div className="absolute translate-y-16 shadow-lg rounded-md w-40 flex flex-col items-center py-2 bg-white">
+            <div className="absolute translate-y-16 shadow-lg rounded-md w-40 flex flex-col items-center py-2 bg-white z-30">
               <Link href={"/myPage"}>
                 <div className="text-sm cursor-pointer hover:text-hover my-2">마이페이지</div>
               </Link>

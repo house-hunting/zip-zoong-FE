@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import listImg from "/public/집중 배너.jpeg";
 import { MdOutlineCheckCircle } from "react-icons/md";

@@ -1,3 +1,4 @@
+import Script from "next/script";
 import React, { useState, useEffect } from "react";
 
 declare global {
@@ -9,19 +10,42 @@ const WriteMapPage: React.FC = () => {
   const { kakao } = window;
   const [markers, setMarkers] = useState<any[]>([]);
   const [map, setMap] = useState<any | null>(null);
-  const [infowindow] = useState(new kakao.maps.InfoWindow({ zIndex: 1 }));
+  const [infowindow] = useState<any>(new kakao.maps.InfoWindow({ zIndex: 1 }));
   const [keyword, setKeyword] = useState<string>("맛집");
   const [pagination, setPagination] = useState<any | null>(null);
 
+  // console.log(new kakao.maps.InfoWindow());
+
+  // 지도 띄우기
   useEffect(() => {
-    const mapContainer = document.getElementById("map");
-    const mapOption = {
-      center: new kakao.maps.LatLng(37.566826, 126.9786567),
-      level: 3,
+    // const mapContainer = document.getElementById("map");
+    // const mapOption = {
+    //   center: new kakao.maps.LatLng(37.566826, 126.9786567),
+    //   level: 3,
+    // };
+
+    // const kakaoMap = new kakao.maps.Map(mapContainer, mapOption);
+    // setMap(kakaoMap);
+
+    const kakaoMapScript = document.createElement("script");
+    kakaoMapScript.async = false;
+    kakaoMapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAOMAP_APPKEY}&autoload=false`;
+    document.head.appendChild(kakaoMapScript);
+
+    const onLoadKakaoAPI = () => {
+      window.kakao.maps.load(() => {
+        const container = document.getElementById("map");
+        const options = {
+          center: new window.kakao.maps.LatLng(37.566826, 126.9786567),
+          level: 3,
+        };
+
+        const map = new window.kakao.maps.Map(container, options);
+        setMap(map);
+      });
     };
 
-    const kakaoMap = new kakao.maps.Map(mapContainer, mapOption);
-    setMap(kakaoMap);
+    kakaoMapScript.addEventListener("load", onLoadKakaoAPI);
   }, []);
 
   const searchPlaces = async () => {
@@ -208,6 +232,11 @@ const WriteMapPage: React.FC = () => {
         <ul id="placesList"></ul>
         <div id="pagination"></div>
       </div>
+      <Script src="https://developers.kakao.com/sdk/js/kakao.js" async />
+      <Script
+        type="text/javascript"
+        src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAOMAP_APPKEY}&autoload=false&libraries=services`}
+      />
     </div>
   );
 };

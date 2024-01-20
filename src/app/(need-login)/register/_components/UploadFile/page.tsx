@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { ChangeEvent } from "react";
-import { FieldErrors, UseFormRegister } from "react-hook-form";
+import { ChangeEvent, useEffect, useState } from "react";
+import { FieldErrors, FieldValues, UseFormRegister, UseFormSetValue } from "react-hook-form";
 import { RegiFormDatas } from "../regiSchema";
 import { UploadImagesType } from "../../page";
 
@@ -11,23 +11,68 @@ type OptionProps = {
   errors: FieldErrors<RegiFormDatas>;
   setImages: React.Dispatch<React.SetStateAction<UploadImagesType>>;
   images: UploadImagesType;
+  // setValue: UseFormSetValue<FieldValues>;
 };
 
-export const UploadFile: React.FC<OptionProps> = ({ register, errors, setImages, images }) => {
-  const onImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
+export const UploadFile: React.FC<OptionProps> = ({
+  register,
+  errors,
+  setImages,
+  images,
+  // setValue,
+}) => {
+  const [imgSrc, setImgSrc] = useState<string[]>([]);
+  const [uploaded, setUploaded] = useState<File[]>([]);
+
+  const onImageUpload = async (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
     const files = e.target.files;
-    const fileArray = Array.from(files);
+    // const fileArray = Array.from(files);
 
     //c
-    const newImages = Array.from(files, (file) => URL.createObjectURL(file));
-    setImages({
-      imageFiles: [...images.imageFiles, ...fileArray],
-      blob: [...images.blob, ...newImages],
-    });
+    console.log(typeof images);
+    const newImages = Array.from(files, (file) => ({ url: URL.createObjectURL(file) }));
+    // setImages({
+    //   // imageFiles: [...images.imageFiles, ...fileArray],
+    //   create: [...images.create, ...newImages],
+    // });
+    setImages((prevImages) => ({ create: [...prevImages.create, ...newImages] }));
+
+    console.log(typeof newImages);
+
+    // setImages([]);
+    //   if (e.target.files) {
+    //     const fileArr = e.target.files;
+    //     const fileURLs: string[] = [];
+    //     const arrForUpload: File[] = [];
+
+    //     for (let i = 0; i < fileArr.length && i < 5; i++) {
+    //       const file = fileArr[i];
+    //       const fileURL = await readFileAsync(file);
+    //       fileURLs.push(fileURL as string);
+    //       arrForUpload.push(fileArr[i]);
+    //     }
+
+    //     setImgSrc(fileURLs);
+    //     setUploaded(arrForUpload);
+    //   } else setImgSrc(imgSrc);
+    // };
+
+    // const readFileAsync = (file: File) => {
+    //   return new Promise((resolve, reject) => {
+    //     const reader = new FileReader();
+    //     reader.onload = () => resolve(reader.result);
+    //     reader.onerror = reject;
+    //     reader.readAsDataURL(file);
+    //   });
   };
 
-  console.log(images);
+  // console.log(uploaded);
+
+  // useEffect(() => {
+  //   setValue("roomImage", uploaded);
+  // }, [images]); // useEffect를 사용하여 images가 변경될 때마다 로그를 출력
+
   return (
     <div className="border-y border-b-black grid grid-cols-6 justify-between">
       <div className="flex justify-center items-center border">
@@ -58,12 +103,12 @@ export const UploadFile: React.FC<OptionProps> = ({ register, errors, setImages,
           )}
         </div>
         <div className="mt-5 flex flex-wrap">
-          {images?.blob.map((imageUrl, index) => (
+          {images?.create.map((imageUrl, index) => (
             <div key={index} className="mr-2">
               <Image
                 id="roomImage"
                 key={index}
-                src={imageUrl}
+                src={imageUrl.url}
                 alt={`Image ${index + 1}`}
                 width={150}
                 height={150}

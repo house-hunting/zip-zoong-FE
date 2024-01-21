@@ -23,5 +23,6 @@ export const getRoom = async (): Promise<RootType> => {
   if (!res.ok) {
     if (!res.ok) throw new Error("정보를 가져올 수 없습니다.");
   }
+
   return res.json();
 };

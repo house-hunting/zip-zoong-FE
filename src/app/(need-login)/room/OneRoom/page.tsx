@@ -1,5 +1,6 @@
 "use client";
 
+import { Card } from "@/components/Card/Card";
 import WriteMapPage from "@/components/Map/Map";
 import { getRoom } from "@/utils/getOneRoom";
 import { useEffect, useState } from "react";
@@ -36,11 +37,15 @@ export default function OneRoom() {
     };
     fetchData();
   }, []);
-  console.log(room);
+
   return (
-    <div className="flex">
-      <WriteMapPage />
-      <div className="bg-white z-50">asdf</div>
+    <div className="flex w-full justify-between">
+      <div>
+        <WriteMapPage />
+      </div>
+      <div className="flex flex-col items-end z-40 h-screen overflow-y-auto">
+        <Card room={room} />
+      </div>
     </div>
   );
 }

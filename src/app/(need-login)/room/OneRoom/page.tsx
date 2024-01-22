@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 export type RootType = Root2[];
 
 export interface Root2 {
+  seq: number;
   title: string;
   deposit: number;
   month: number;
@@ -32,7 +33,7 @@ export default function OneRoom() {
         const roomData = await getRoom();
         setRoom(roomData);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error(error);
       }
     };
     fetchData();

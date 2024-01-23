@@ -6,10 +6,12 @@ import { MdOutlineCheckCircle } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { Heart } from "../Heart/Heart";
+import { useRouter } from "next/navigation";
 
 export type RootType = Root2[];
 
 export interface Root2 {
+  seq: number;
   title: string;
   deposit: number;
   month: number;
@@ -30,13 +32,31 @@ type OptionProps = {
   room: RootType | null;
 };
 export const Card = ({ room }: OptionProps) => {
+  const router = useRouter();
+  console.log(room);
+
+  const goDetail = (seq: number) => {
+    router.push(`/room/${seq}`);
+  };
+
   return (
     <>
       {room?.map((el, idx) => (
         <div key={idx} className="hidden xs:flex justify-center w-80 p-8 bg-white">
-          <div className="hover:cursor-pointer">
+          <div className="hover:cursor-pointer" onClick={() => goDetail(el.seq)}>
             <div className="relative">
-              <Image className="h-72 rounded-md" src={listImg} alt="img" />
+              <>
+                {/* {el.roomImage.map((img, idx) => ( */}
+                <Image
+                  // key={idx}
+                  className="h-72 rounded-md"
+                  src={`/${el.roomImage[1].url}`}
+                  alt="img"
+                  width={100}
+                  height={100}
+                />
+                {/* ))} */}
+              </>
               <div className="absolute bottom-2 right-3 ">
                 <Heart />
               </div>

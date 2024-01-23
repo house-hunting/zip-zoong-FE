@@ -1,6 +1,7 @@
 export type RootType = Root2[];
 
 export interface Root2 {
+  seq: number;
   title: string;
   deposit: number;
   month: number;

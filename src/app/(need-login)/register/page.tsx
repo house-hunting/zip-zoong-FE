@@ -36,10 +36,24 @@ export default function Register() {
     handleSubmit,
     control,
     register,
-    setValue,
+    watch,
+    getValues,
     formState: { errors },
   } = useForm<RegiFormDatas>({ resolver: yupResolver(RegisterSchema) });
   const router = useRouter();
+
+  // const costValue = watch("cost");
+
+  // const handleRadioChange = (value: boolean) => {
+  //   setValue("cost", value); // 폼 상태를 업데이트
+
+  //   // "없음"을 선택한 경우
+  //   if (!value) {
+  //     setValue("roomCost", ""); // roomCost 값 초기화
+  //   }
+  // };
+  const a = getValues("cost");
+  console.log(a);
 
   console.log("크리", typeof images.create);
   console.log("그냥", typeof images);
@@ -400,6 +414,7 @@ export default function Register() {
                         style="border p-2 text-xs xs:text-sm rounded-md text-end w-24 xs:w-32 sm:w-auto"
                         placeholder="0"
                         label="만원"
+                        disabled={getValues("cost")}
                       />
                     </div>
                   </div>
@@ -418,6 +433,7 @@ export default function Register() {
                         label="없음"
                         control={control}
                         errors={errors}
+                        // onChange={handleRadioChange}
                       />
                       <RadioForm
                         name="cost"
@@ -426,6 +442,7 @@ export default function Register() {
                         label="있음"
                         control={control}
                         errors={errors}
+                        // onChange={handleRadioChange}
                       />
                     </RadioGroup>
                     <div className="md:ml-18 lg:ml-20 flex items-center">

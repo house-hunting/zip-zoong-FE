@@ -31,6 +31,7 @@ export default function Register() {
     // imageFiles: [],
     create: [],
   });
+  const [imageUrls, setImageUrls] = useState<string[]>();
 
   const {
     handleSubmit,
@@ -54,7 +55,7 @@ export default function Register() {
   // };
   const a = getValues("cost");
   console.log(a);
-
+  console.log(images);
   console.log("크리", typeof images.create);
   console.log("그냥", typeof images);
 
@@ -151,8 +152,10 @@ export default function Register() {
   const onSubmit = async (data: RegiFormDatas) => {
     alert(JSON.stringify(data));
     console.log(data);
+    console.log("try outside");
     try {
       const formData = new FormData();
+
       formData.append("roomType", data.roomType);
       formData.append("address", data.address);
       formData.append("addressDetail", data.addressDetail);
@@ -176,24 +179,26 @@ export default function Register() {
       formData.append("parkingCost", data.parkingCost.toString());
       formData.append("title", data.title);
       formData.append("textArea", data.textArea);
+      formData.append("roomImage", images);
+
+      console.log(data.roomImage);
+
+      // for (let element of data.roomImage) {
+      //   formData.append("image", element);
+      // }
+
+      for (let x of formData.entries()) {
+        console.log(x);
+      }
+
+      // data.roomImage.forEach((element: ) => {
+      //   formData.append("images", element);
+      // });
 
       // if (images) {
       //   images.imageFiles.forEach((image) => formData.append("roomImage", image));
       // } else {
       //   return;
-      // }
-      [...data.roomImage].forEach((element) => {
-        formData.append("images", element);
-      });
-
-      // formData.append("roomImage", data.roomImage);
-
-      // if (data.roomImage && data.roomImage.length > 0) {
-      //   data.roomImage.forEach((file) => {
-      //     if (file instanceof File) {
-      //       formData.append("images", file);
-      //     }
-      //   });
       // }
 
       const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/board/uploadBoard`, {

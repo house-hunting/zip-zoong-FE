@@ -38,7 +38,7 @@ export const UploadFile: React.FC<OptionProps> = ({
     // });
     setImages((prevImages) => ({ create: [...prevImages.create, ...newImages] }));
 
-    console.log(typeof newImages);
+    console.log(newImages);
 
     // setImages([]);
     //   if (e.target.files) {

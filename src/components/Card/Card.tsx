@@ -38,7 +38,10 @@ export const Card = ({ room }: OptionProps) => {
   const goDetail = (seq: number) => {
     router.push(`/room/${seq}`);
   };
+  // const aa = room?.map((el) => el.roomImage[0].url);
+  const aa = room?.map((el) => el.roomImage[0].url);
 
+  console.log(aa);
   return (
     <>
       {room?.map((el, idx) => (
@@ -48,12 +51,11 @@ export const Card = ({ room }: OptionProps) => {
               <>
                 {/* {el.roomImage.map((img, idx) => ( */}
                 <Image
-                  // key={idx}
                   className="h-72 rounded-md"
-                  src={`/${el.roomImage[1].url}`}
+                  src={`${el.roomImage[0].url}`}
                   alt="img"
-                  width={100}
-                  height={100}
+                  width={200}
+                  height={200}
                 />
                 {/* ))} */}
               </>

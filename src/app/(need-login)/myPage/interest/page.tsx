@@ -1,5 +1,5 @@
-import { Card } from "@/components/Card/Card";
-import { MobileCard } from "@/components/Card/MobileCard";
+import { Card } from "@/components/Cards/Cards";
+import { MobileCard } from "@/components/Cards/MobileCard";
 
 export default function MyInterest() {
   return (

@@ -35,7 +35,8 @@ export const getDetail = async (seq: number): Promise<DetailType> => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/page/boardDetail/${seq}`);
   console.log(res);
   if (!res.ok) {
-    if (!res.ok) throw new Error("정보를 가져올 수 없습니다.");
+    // throw new Error("정보를 가져올 수 없습니다.");
+    console.error("정보를 가져올 수 없습니다.")
   }
 
   return res.json();

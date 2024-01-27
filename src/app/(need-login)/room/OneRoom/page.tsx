@@ -1,7 +1,7 @@
 "use client";
 
-import { Card } from "@/components/Card/Card";
-import WriteMapPage from "@/components/Map/Map";
+import { Cards } from "@/components/Cards/Cards";
+// import WriteMapPage from "@/components/Map/Map";
 import { getRoom } from "@/utils/getOneRoom";
 import { useEffect, useState } from "react";
 
@@ -25,13 +25,13 @@ export interface RoomImage {
   boardId: number;
 }
 export default function OneRoom() {
-  const [room, setRoom] = useState<RootType | null>(null);
+  const [rooms, setRooms] = useState<RootType | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const roomData = await getRoom();
-        setRoom(roomData);
+        setRooms(roomData);
       } catch (error) {
         console.error(error);
       }
@@ -42,10 +42,10 @@ export default function OneRoom() {
   return (
     <div className="flex w-full justify-between">
       <div>
-        <WriteMapPage />
+        {/* <WriteMapPage /> */}
       </div>
       <div className="flex flex-col items-end z-40 h-screen overflow-y-auto">
-        <Card room={room} />
+        <Cards rooms={rooms} />
       </div>
     </div>
   );

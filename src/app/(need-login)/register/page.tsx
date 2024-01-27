@@ -21,17 +21,15 @@ import { useRouter } from "next/navigation";
 //   create: ImageType[];
 // }
 
-export type UploadImagesType = {
-  create: { url: string }[];
-};
+export type UploadImagesType = {url: string }[];
 
 export default function Register() {
   const [address, setAddress] = useState<string>("");
-  const [images, setImages] = useState<UploadImagesType>({
+  const [images, setImages] = useState<UploadImagesType>(
     // imageFiles: [],
-    create: [],
-  });
-  const [imageUrls, setImageUrls] = useState<string[]>();
+    []
+  );
+  const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
 
   const {
     handleSubmit,
@@ -42,112 +40,6 @@ export default function Register() {
     formState: { errors },
   } = useForm<RegiFormDatas>({ resolver: yupResolver(RegisterSchema) });
   const router = useRouter();
-
-  // const costValue = watch("cost");
-
-  // const handleRadioChange = (value: boolean) => {
-  //   setValue("cost", value); // 폼 상태를 업데이트
-
-  //   // "없음"을 선택한 경우
-  //   if (!value) {
-  //     setValue("roomCost", ""); // roomCost 값 초기화
-  //   }
-  // };
-  const a = getValues("cost");
-  console.log(a);
-  console.log(images);
-  console.log("크리", typeof images.create);
-  console.log("그냥", typeof images);
-
-  // ======================================
-
-  // const useForms = (initialState: RegiFormDatas) => {
-  //   const [formData, setFormData] = useState<RegiFormDatas>(initialState);
-
-  //   const handleChange = (
-  //     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLInputElement | any>
-  //   ) => {
-  //     const { name, value, files } = e.target;
-  //     // const newValue = name === "image" ? (files ? files[0] : null) : value;
-  //     const newValue = name === "image" ? null : value;
-
-  //     setFormData((prevData) => ({
-  //       ...prevData,
-  //       [name]: newValue,
-  //     }));
-  //   };
-
-  //   const resetForm = () => {
-  //     setFormData(initialState);
-  //   };
-
-  //   return { formData, handleChange, resetForm };
-  // };
-  // ======================================
-
-  // const { formData, handleChange, resetForm } = useForms({
-  //   roomType: "",
-  //   address: "",
-  //   addressDetail: "",
-  //   roomArea: 0,
-  //   roomInfo: "",
-
-  //   rentType: "",
-  //   deposit: 0,
-  //   month: 0,
-  //   cost: false,
-  //   roomCost: 0,
-
-  //   selectDate: false,
-  //   datePicker: new Date(),
-
-  //   totalFloors: "",
-  //   floorsNumber: "",
-
-  //   elevator: false,
-  //   parking: false,
-  //   parkingCost: 0,
-
-  //   title: "",
-  //   textArea: "",
-  // });
-
-  // ===========================================================
-  // const onSubmit = async (data: RegiFormDatas) => {
-  //   alert(JSON.stringify(data));
-  //   console.error("data:", data);
-
-  //   try {
-  //     const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/board/uploadBoard`, {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(data),
-  //     });
-
-  //     console.log("업로드 성공:", response);
-
-  //     if (!response.ok) {
-  //       throw new Error("게시글 업로드에 실패하셨습니다");
-  //     }
-
-  //     console.log("업로드 data:", response.json());
-  //     console.log("업로드 성공data:", data);
-  //   } catch (error) {
-  //     console.error("업로드 실패:", error);
-  //   }
-  // };
-  // ===========================================================
-
-  // const test = () => {
-  //   try {
-  //   } catch {}
-  // };
-
-  // useEffect(() => {
-  //   test();
-  // }, []);
 
   const onSubmit = async (data: RegiFormDatas) => {
     alert(JSON.stringify(data));
@@ -179,7 +71,10 @@ export default function Register() {
       formData.append("parkingCost", data.parkingCost.toString());
       formData.append("title", data.title);
       formData.append("textArea", data.textArea);
-      formData.append("roomImage", images);
+
+      uploadedFiles.forEach((file) => {
+        formData.append("roomImage", file);
+      });
 
       console.log(data.roomImage);
 
@@ -203,10 +98,7 @@ export default function Register() {
 
       const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/board/uploadBoard`, {
         method: "POST",
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-        body: JSON.stringify(formData),
+        body: formData,
       });
 
       if (!res.ok) {
@@ -214,9 +106,9 @@ export default function Register() {
       }
 
       const result = await res.json();
-      console.error(result);
+      console.log('result:', result);
 
-      setImages(result);
+      // setImages(result);
     } catch (error) {
       console.error(error);
     }
@@ -227,6 +119,7 @@ export default function Register() {
       <form
         className="flex justify-center items-center flex-col md:p-20 mb-20"
         onSubmit={handleSubmit(onSubmit)}
+        encType="multipart/form-data"
       >
         <div className="flex w-full xs:hidden pt-16 pl-6" onClick={() => router.back()}>
           <MdArrowBackIosNew size={30} />
@@ -470,6 +363,7 @@ export default function Register() {
               register={register}
               errors={errors}
               setImages={setImages}
+              setUploadedFiles={setUploadedFiles}
               images={images}
               // setValue={setValue}
             />

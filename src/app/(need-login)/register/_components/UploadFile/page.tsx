@@ -10,8 +10,8 @@ type OptionProps = {
   register: UseFormRegister<RegiFormDatas>;
   errors: FieldErrors<RegiFormDatas>;
   setImages: React.Dispatch<React.SetStateAction<UploadImagesType>>;
+  setUploadedFiles: React.Dispatch<React.SetStateAction<File[]>>;
   images: UploadImagesType;
-  // setValue: UseFormSetValue<FieldValues>;
 };
 
 export const UploadFile: React.FC<OptionProps> = ({
@@ -19,7 +19,7 @@ export const UploadFile: React.FC<OptionProps> = ({
   errors,
   setImages,
   images,
-  // setValue,
+  setUploadedFiles
 }) => {
   const [imgSrc, setImgSrc] = useState<string[]>([]);
   const [uploaded, setUploaded] = useState<File[]>([]);
@@ -27,51 +27,10 @@ export const UploadFile: React.FC<OptionProps> = ({
   const onImageUpload = async (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
     const files = e.target.files;
-    // const fileArray = Array.from(files);
-
-    //c
-    console.log(typeof images);
     const newImages = Array.from(files, (file) => ({ url: URL.createObjectURL(file) }));
-    // setImages({
-    //   // imageFiles: [...images.imageFiles, ...fileArray],
-    //   create: [...images.create, ...newImages],
-    // });
-    setImages((prevImages) => ({ create: [...prevImages.create, ...newImages] }));
-
-    console.log(newImages);
-
-    // setImages([]);
-    //   if (e.target.files) {
-    //     const fileArr = e.target.files;
-    //     const fileURLs: string[] = [];
-    //     const arrForUpload: File[] = [];
-
-    //     for (let i = 0; i < fileArr.length && i < 5; i++) {
-    //       const file = fileArr[i];
-    //       const fileURL = await readFileAsync(file);
-    //       fileURLs.push(fileURL as string);
-    //       arrForUpload.push(fileArr[i]);
-    //     }
-
-    //     setImgSrc(fileURLs);
-    //     setUploaded(arrForUpload);
-    //   } else setImgSrc(imgSrc);
-    // };
-
-    // const readFileAsync = (file: File) => {
-    //   return new Promise((resolve, reject) => {
-    //     const reader = new FileReader();
-    //     reader.onload = () => resolve(reader.result);
-    //     reader.onerror = reject;
-    //     reader.readAsDataURL(file);
-    //   });
+    setImages((prevImages) => ([...prevImages, ...newImages]));
+    setUploadedFiles((prevImages) => [...prevImages, ...files]);
   };
-
-  // console.log(uploaded);
-
-  // useEffect(() => {
-  //   setValue("roomImage", uploaded);
-  // }, [images]); // useEffect를 사용하여 images가 변경될 때마다 로그를 출력
 
   return (
     <div className="border-y border-b-black grid grid-cols-6 justify-between">
@@ -99,11 +58,11 @@ export const UploadFile: React.FC<OptionProps> = ({
             />
           </label>
           {errors.roomImage && (
-            <div className="text-font-error text-xs mt-5">{errors.roomImage.message}</div>
+            <div className="text-font-error text-xs mt-5">{errors.roomImage.message as string}</div>
           )}
         </div>
         <div className="mt-5 flex flex-wrap">
-          {images?.create.map((imageUrl, index) => (
+          {images?.map((imageUrl, index) => (
             <div key={index} className="mr-2">
               <Image
                 id="roomImage"
@@ -112,7 +71,6 @@ export const UploadFile: React.FC<OptionProps> = ({
                 alt={`Image ${index + 1}`}
                 width={150}
                 height={150}
-                // style={{ objectFit: "fill" }}
               />
             </div>
           ))}

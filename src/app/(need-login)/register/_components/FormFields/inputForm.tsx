@@ -21,8 +21,8 @@ interface InputProps {
   label?: string;
   control: Control<RegiFormDatas>;
   errors?: FieldErrors<FormData>;
-  getValues?: UseFormGetValues<RegiFormDatas>;
-  disabled?: boolean | string | undefined;
+  // getValues?: UseFormGetValues<RegiFormDatas>;
+  // disabled?: boolean | string | undefined;
   placeholder?: string;
   children?: ReactNode;
 }
@@ -30,14 +30,14 @@ interface InputProps {
 export const InputForm: React.FC<InputProps> = ({
   name,
   control,
-  disabled,
+  // disabled,
   label,
   style,
   errors,
   ...children
 }) => {
   // const isDisabled = getValues("cost");
-  console.log(disabled);
+  // console.log(disabled);
   return (
     <>
       <>
@@ -46,9 +46,9 @@ export const InputForm: React.FC<InputProps> = ({
           control={control}
           render={({ field }) => (
             <input
+              className={style}
               {...field}
               {...children}
-              className={style}
               // disabled={disabled}
             />
           )}

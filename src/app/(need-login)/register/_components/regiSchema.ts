@@ -14,7 +14,7 @@ export const RegisterSchema = yup.object().shape({
   roomCost: yup.number().required("관리비를 입력해주세요").typeError("숫자로 입력해주세요."),
 
   selectDate: yup.boolean().required("선택은 필수입니다"),
-  datePicker: yup.string().required("날짜를 필수로 입력해주세요"),
+  datePicker: yup.date().required("날짜를 필수로 입력해주세요"),
 
   totalFloors: yup.string().required("층 수 선택은 필수입니다"),
   floorsNumber: yup.string().required("층 수 선택은 필수입니다"),

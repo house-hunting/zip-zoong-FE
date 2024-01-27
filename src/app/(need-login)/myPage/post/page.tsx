@@ -5,8 +5,8 @@ export default function MyPost() {
   return (
     <div className="flex justify-center w-full flex-col">
       <div className="flex justify-center items-center mb-5 font-bold xs:hidden">내 게시글</div>
-      <Card />
-      <MobileCard />
+      {/* <Card /> */}
+      {/* <MobileCard /> */}
     </div>
   );
 }

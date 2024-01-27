@@ -7,8 +7,9 @@ import { FaMagnifyingGlass } from "react-icons/fa6";
 import { IoIosArrowUp } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
 import Link from "next/link";
-import { LoginDataType } from "@/store/loginData.atoms";
+import { LoginDataType, loginData } from "@/store/loginData.atoms";
 import { useEffect, useState } from "react";
+import { useAtom } from "jotai";
 
 const nav = [
   {
@@ -29,9 +30,8 @@ const nav = [
 ];
 
 export const Header: React.FC = () => {
-  const [local, setLocal] = useState<LoginDataType | null>(null);
+  const [local, setLocal] = useAtom(loginData);
   const [drop, setDrop] = useState<boolean>(false);
-  // console.log(local);
 
   useEffect(() => {
     const userInfo = localStorage.getItem("userId");

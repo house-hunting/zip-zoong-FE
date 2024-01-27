@@ -9,12 +9,4 @@ export interface LoginDataType {
   provider?: string;
   img?: string;
 }
-export const loginData = atom<LoginDataType>({
-  id: "",
-  email: "",
-  nickname: "",
-  password: "",
-  confirmPW: "",
-  provider: "",
-  img: "",
-});
+export const loginData = atom<LoginDataType | null>(null);

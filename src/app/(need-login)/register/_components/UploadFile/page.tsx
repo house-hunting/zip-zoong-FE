@@ -32,39 +32,15 @@ export const UploadFile: React.FC<OptionProps> = ({
     //c
     console.log(typeof images);
     const newImages = Array.from(files, (file) => ({ url: URL.createObjectURL(file) }));
-    // setImages({
-    //   // imageFiles: [...images.imageFiles, ...fileArray],
-    //   create: [...images.create, ...newImages],
-    // });
-    setImages((prevImages) => ({ create: [...prevImages.create, ...newImages] }));
+
+    // setImages((prevImages) => ({ create: [...prevImages.create, ...newImages] }));
+    setImages((prevImages) => ({
+      roomImage: {
+        create: [...prevImages.roomImage.create, ...newImages],
+      },
+    }));
 
     console.log(newImages);
-
-    // setImages([]);
-    //   if (e.target.files) {
-    //     const fileArr = e.target.files;
-    //     const fileURLs: string[] = [];
-    //     const arrForUpload: File[] = [];
-
-    //     for (let i = 0; i < fileArr.length && i < 5; i++) {
-    //       const file = fileArr[i];
-    //       const fileURL = await readFileAsync(file);
-    //       fileURLs.push(fileURL as string);
-    //       arrForUpload.push(fileArr[i]);
-    //     }
-
-    //     setImgSrc(fileURLs);
-    //     setUploaded(arrForUpload);
-    //   } else setImgSrc(imgSrc);
-    // };
-
-    // const readFileAsync = (file: File) => {
-    //   return new Promise((resolve, reject) => {
-    //     const reader = new FileReader();
-    //     reader.onload = () => resolve(reader.result);
-    //     reader.onerror = reject;
-    //     reader.readAsDataURL(file);
-    //   });
   };
 
   // console.log(uploaded);
@@ -98,12 +74,12 @@ export const UploadFile: React.FC<OptionProps> = ({
               }}
             />
           </label>
-          {errors.roomImage && (
+          {/* {errors.roomImage && (
             <div className="text-font-error text-xs mt-5">{errors.roomImage.message}</div>
-          )}
+          )} */}
         </div>
         <div className="mt-5 flex flex-wrap">
-          {images?.create.map((imageUrl, index) => (
+          {images?.roomImage.create.map((imageUrl, index) => (
             <div key={index} className="mr-2">
               <Image
                 id="roomImage"

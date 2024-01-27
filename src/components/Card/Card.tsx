@@ -52,10 +52,10 @@ export const Card = ({ room }: OptionProps) => {
                 {/* {el.roomImage.map((img, idx) => ( */}
                 <Image
                   className="h-72 rounded-md"
-                  src={`${el.roomImage[0].url}`}
+                  src={`/${el.roomImage[0].url}`}
                   alt="img"
-                  width={200}
-                  height={200}
+                  width={250}
+                  height={250}
                 />
                 {/* ))} */}
               </>

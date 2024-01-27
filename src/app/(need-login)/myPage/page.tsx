@@ -9,8 +9,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { MdArrowBackIosNew } from "react-icons/md";
 import { useRouter } from "next/navigation";
+import { useAtom } from "jotai";
+import { loginData } from "@/store/loginData.atoms";
 
 export default function ProfileEdit() {
+  const [local, setLocal] = useAtom(loginData);
+  console.log("asdf", local);
   const photoInput: RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
   const router = useRouter();
 
@@ -44,20 +48,21 @@ export default function ProfileEdit() {
             <Label className="font-bold w-24" htmlFor="email">
               이메일 주소
             </Label>
-            <Input className="col-span-4" type="email" id="email" placeholder="Email" />
+            <Input
+              className="col-span-4"
+              type="email"
+              id="email"
+              placeholder="Email"
+              defaultValue={local?.email}
+              disabled
+            />
           </div>
           <div className="grid grid-cols-5 w-full max-w-sm items-center gap-3.5 m-3">
             <Label className="font-bold w-24" htmlFor="email">
               닉네임
             </Label>
-            <Input className="col-span-3" type="email" id="email" placeholder="Email" />
+            <Input className="col-span-3" type="email" id="email" placeholder="nickName" />
             <button className="bg-primary-200 text-white h-11 text-sm rounded-md">중복검사</button>
-          </div>
-          <div className="grid grid-cols-5 w-full max-w-sm items-center gap-3.5 m-3">
-            <Label className="font-bold w-24" htmlFor="email">
-              휴대폰 번호
-            </Label>
-            <Input className="col-span-4" type="email" id="email" placeholder="Email" />
           </div>
           <div className="flex justify-center items-center bg-primary-200 mt-10 xs:mt-32 w-11/12 h-10 rounded-md">
             <button className="text-white">저장하기</button>

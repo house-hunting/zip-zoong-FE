@@ -13,23 +13,22 @@ import { UploadFile } from "./_components/UploadFile/page";
 import { MdArrowBackIosNew } from "react-icons/md";
 import { useRouter } from "next/navigation";
 
-// type ImageType = {
-//   url: string;
-// };
-// export interface UploadImagesType {
-//   // imageFiles: File[];
-//   create: ImageType[];
-// }
+export type ImageDataType = {
+  url: string;
+};
 
 export type UploadImagesType = {
-  create: { url: string }[];
+  roomImage: {
+    create: ImageDataType[];
+  };
 };
 
 export default function Register() {
   const [address, setAddress] = useState<string>("");
   const [images, setImages] = useState<UploadImagesType>({
-    // imageFiles: [],
-    create: [],
+    roomImage: {
+      create: [],
+    },
   });
   const [imageUrls, setImageUrls] = useState<string[]>();
 
@@ -53,101 +52,12 @@ export default function Register() {
   //     setValue("roomCost", ""); // roomCost 값 초기화
   //   }
   // };
-  const a = getValues("cost");
-  console.log(a);
+  // const a = getValues("cost");
+  // console.log(a);
   console.log(images);
-  console.log("크리", typeof images.create);
-  console.log("그냥", typeof images);
-
-  // ======================================
-
-  // const useForms = (initialState: RegiFormDatas) => {
-  //   const [formData, setFormData] = useState<RegiFormDatas>(initialState);
-
-  //   const handleChange = (
-  //     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLInputElement | any>
-  //   ) => {
-  //     const { name, value, files } = e.target;
-  //     // const newValue = name === "image" ? (files ? files[0] : null) : value;
-  //     const newValue = name === "image" ? null : value;
-
-  //     setFormData((prevData) => ({
-  //       ...prevData,
-  //       [name]: newValue,
-  //     }));
-  //   };
-
-  //   const resetForm = () => {
-  //     setFormData(initialState);
-  //   };
-
-  //   return { formData, handleChange, resetForm };
-  // };
-  // ======================================
-
-  // const { formData, handleChange, resetForm } = useForms({
-  //   roomType: "",
-  //   address: "",
-  //   addressDetail: "",
-  //   roomArea: 0,
-  //   roomInfo: "",
-
-  //   rentType: "",
-  //   deposit: 0,
-  //   month: 0,
-  //   cost: false,
-  //   roomCost: 0,
-
-  //   selectDate: false,
-  //   datePicker: new Date(),
-
-  //   totalFloors: "",
-  //   floorsNumber: "",
-
-  //   elevator: false,
-  //   parking: false,
-  //   parkingCost: 0,
-
-  //   title: "",
-  //   textArea: "",
-  // });
+  // console.log("크리", typeof images.create);
 
   // ===========================================================
-  // const onSubmit = async (data: RegiFormDatas) => {
-  //   alert(JSON.stringify(data));
-  //   console.error("data:", data);
-
-  //   try {
-  //     const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/board/uploadBoard`, {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(data),
-  //     });
-
-  //     console.log("업로드 성공:", response);
-
-  //     if (!response.ok) {
-  //       throw new Error("게시글 업로드에 실패하셨습니다");
-  //     }
-
-  //     console.log("업로드 data:", response.json());
-  //     console.log("업로드 성공data:", data);
-  //   } catch (error) {
-  //     console.error("업로드 실패:", error);
-  //   }
-  // };
-  // ===========================================================
-
-  // const test = () => {
-  //   try {
-  //   } catch {}
-  // };
-
-  // useEffect(() => {
-  //   test();
-  // }, []);
 
   const onSubmit = async (data: RegiFormDatas) => {
     alert(JSON.stringify(data));
@@ -155,7 +65,6 @@ export default function Register() {
     console.log("try outside");
     try {
       const formData = new FormData();
-
       formData.append("roomType", data.roomType);
       formData.append("address", data.address);
       formData.append("addressDetail", data.addressDetail);
@@ -179,27 +88,20 @@ export default function Register() {
       formData.append("parkingCost", data.parkingCost.toString());
       formData.append("title", data.title);
       formData.append("textArea", data.textArea);
-      formData.append("roomImage", images);
 
       console.log(data.roomImage);
 
-      // for (let element of data.roomImage) {
-      //   formData.append("image", element);
-      // }
+      for (let element of data.roomImage) {
+        formData.append("image", element);
+      }
 
       for (let x of formData.entries()) {
         console.log(x);
       }
 
-      // data.roomImage.forEach((element: ) => {
-      //   formData.append("images", element);
-      // });
-
-      // if (images) {
-      //   images.imageFiles.forEach((image) => formData.append("roomImage", image));
-      // } else {
-      //   return;
-      // }
+      images.roomImage.create.forEach((image, index) => {
+        formData.append(`roomImage.create[${index}].url`, image.url);
+      });
 
       const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/board/uploadBoard`, {
         method: "POST",
@@ -419,7 +321,7 @@ export default function Register() {
                         style="border p-2 text-xs xs:text-sm rounded-md text-end w-24 xs:w-32 sm:w-auto"
                         placeholder="0"
                         label="만원"
-                        disabled={getValues("cost")}
+                        // disabled={getValues("cost")}
                       />
                     </div>
                   </div>

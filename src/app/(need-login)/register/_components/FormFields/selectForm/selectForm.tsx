@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Control, Controller, FieldErrors, FieldValues } from "react-hook-form";
+import { Control, Controller, FieldErrors } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import {
   Select,
@@ -11,7 +11,7 @@ import {
 import { RegiFormDatas } from "../../regiSchema";
 
 type FormData = {
-  totalFloors: string;
+  totalfloor: string;
   floorsNumber: string;
 };
 
@@ -20,7 +20,7 @@ type SelectOption = {
   value?: string;
 };
 
-interface InputProps {
+interface SelectProps {
   name: keyof FormData;
   title: string;
   placeholder: string;
@@ -30,7 +30,7 @@ interface InputProps {
   children?: ReactNode;
 }
 
-export const SelectForm: React.FC<InputProps> = ({
+export const SelectForm: React.FC<SelectProps> = ({
   name,
   control,
   title,

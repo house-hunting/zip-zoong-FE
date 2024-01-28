@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { ChangeEvent, useEffect, useState } from "react";
-import { FieldErrors, FieldValues, UseFormRegister, UseFormSetValue } from "react-hook-form";
+import { ChangeEvent } from "react";
+import { FieldErrors, UseFormRegister } from "react-hook-form";
 import { RegiFormDatas } from "../regiSchema";
 import { UploadImagesType } from "../../page";
 
@@ -11,6 +11,7 @@ type OptionProps = {
   errors: FieldErrors<RegiFormDatas>;
   setImages: React.Dispatch<React.SetStateAction<UploadImagesType>>;
   images: UploadImagesType;
+  setUploadedFiles: React.Dispatch<React.SetStateAction<File[]>>;
   // setValue: UseFormSetValue<FieldValues>;
 };
 
@@ -19,35 +20,18 @@ export const UploadFile: React.FC<OptionProps> = ({
   errors,
   setImages,
   images,
+  setUploadedFiles,
   // setValue,
 }) => {
-  const [imgSrc, setImgSrc] = useState<string[]>([]);
-  const [uploaded, setUploaded] = useState<File[]>([]);
-
   const onImageUpload = async (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
     const files = e.target.files;
-    // const fileArray = Array.from(files);
 
-    //c
-    console.log(typeof images);
     const newImages = Array.from(files, (file) => ({ url: URL.createObjectURL(file) }));
 
-    // setImages((prevImages) => ({ create: [...prevImages.create, ...newImages] }));
-    setImages((prevImages) => ({
-      roomImage: {
-        create: [...prevImages.roomImage.create, ...newImages],
-      },
-    }));
-
-    console.log(newImages);
+    setImages((prevImages) => [...prevImages, ...newImages]);
+    setUploadedFiles((prevImages) => [...prevImages, ...files]);
   };
-
-  // console.log(uploaded);
-
-  // useEffect(() => {
-  //   setValue("roomImage", uploaded);
-  // }, [images]); // useEffect를 사용하여 images가 변경될 때마다 로그를 출력
 
   return (
     <div className="border-y border-b-black grid grid-cols-6 justify-between">
@@ -74,12 +58,12 @@ export const UploadFile: React.FC<OptionProps> = ({
               }}
             />
           </label>
-          {/* {errors.roomImage && (
-            <div className="text-font-error text-xs mt-5">{errors.roomImage.message}</div>
-          )} */}
+          {errors.roomImage && (
+            <div className="text-font-error text-xs mt-5">{errors.roomImage.message as string}</div>
+          )}
         </div>
         <div className="mt-5 flex flex-wrap">
-          {images?.roomImage.create.map((imageUrl, index) => (
+          {images?.map((imageUrl, index) => (
             <div key={index} className="mr-2">
               <Image
                 id="roomImage"
@@ -88,7 +72,6 @@ export const UploadFile: React.FC<OptionProps> = ({
                 alt={`Image ${index + 1}`}
                 width={150}
                 height={150}
-                // style={{ objectFit: "fill" }}
               />
             </div>
           ))}

@@ -2,25 +2,21 @@
 module.exports = {
   darkMode: ["class"],
   content: [
-    "./pages/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
+    './pages/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
+    './src/**/*.{ts,tsx}',
   ],
+  prefix: "",
   theme: {
     container: {
       center: true,
       padding: "2rem",
-    },
-    extend: {
       screens: {
-        xs: "500px",
-        sm: "640px",
-        md: "768px",
-        lg: "1024px",
-        xl: "1280px",
         "2xl": "1400px",
       },
+    },
+    extend: {
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -28,25 +24,8 @@ module.exports = {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          100: "#5FCDFC",
-          200: "#0BB3FB",
-        },
-        subColor: `#FDF3D8`,
-        gray: {
-          100: "#E9E9E9",
-          200: "#D9D9D9",
-          300: "#656565",
-        },
-        modal: "rgba(0,0,0,0.7)",
-        hover: "#14A7E6",
-        kakao: "#fbe300",
-        font: {
-          gray100: "#646F7C",
-          gray200: "#808080",
-          error: "#FF0000",
-          success: "#02B62D",
-          black: "#000000",
-          white: "#FFFFFF",
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
@@ -73,50 +52,26 @@ module.exports = {
           foreground: "hsl(var(--card-foreground))",
         },
       },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
+      },
       keyframes: {
         "accordion-down": {
-          from: { height: 0 },
+          from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
           from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: 0 },
+          to: { height: "0" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
-      fontSize: {
-        xs: "0.75rem",
-        sm: "0.875rem",
-        base: "1rem",
-        md: "1.25rem",
-        big: "1.5rem",
-        lg: "1.75rem",
-        xl: "2rem",
-      },
-      fontWeight: {
-        light: "300",
-        regular: "400",
-        bold: "700",
-        extraBold: "900",
-      },
-      width: {
-        10: "10rem",
-        19: "19rem",
-        25: "25rem",
-      },
-      height: {
-        32: "32rem",
-      },
-      boxShadow: {
-        top: "0px -2px 5px 1px rgba(0, 0, 0, 0.1)",
-      },
-      margin: {
-        center: "0 auto",
-      },
     },
   },
   plugins: [require("tailwindcss-animate")],
-};
+}

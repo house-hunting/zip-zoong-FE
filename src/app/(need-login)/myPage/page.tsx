@@ -15,7 +15,7 @@ import { loginData } from "@/store/loginData.atoms";
 export default function ProfileEdit() {
   const [local, setLocal] = useAtom(loginData);
   console.log("asdf", local);
-  const photoInput: RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
+  const photoInput: RefObject<HTMLInputElement> = useRef<HTMLInputElement | null>(null);
   const router = useRouter();
 
   const handleClick = () => {

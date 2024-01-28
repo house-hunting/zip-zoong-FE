@@ -15,7 +15,7 @@ type FormData = {
   parking?: string;
 };
 
-interface InputProps {
+interface RadioProps {
   name: keyof FormData;
   style: string;
   label: string;
@@ -25,7 +25,7 @@ interface InputProps {
   children?: ReactNode;
 }
 
-export const RadioForm: React.FC<InputProps> = ({
+export const RadioForm: React.FC<RadioProps> = ({
   name,
   control,
   style,

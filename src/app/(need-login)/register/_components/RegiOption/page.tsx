@@ -2,7 +2,7 @@ import { DatePicker } from "@/components/DatePicker/DatePicker";
 import { RadioGroup } from "@/components/ui/radio-group";
 import { RadioForm } from "../FormFields/radioForm";
 import { SelectForm } from "../FormFields/selectForm/selectForm";
-import { floorsNumber, totalFloors } from "../FormFields/selectForm/selectOption";
+import { floorsNumber, totalfloor } from "../FormFields/selectForm/selectOption";
 import { Control, FieldErrors } from "react-hook-form";
 import { RegiFormDatas } from "../regiSchema";
 import { InputForm } from "../FormFields/inputForm";
@@ -57,10 +57,10 @@ export const RegiOption: React.FC<OptionProps> = ({ control, errors }) => {
           <div className="flex">
             <div className="mr-5">
               <SelectForm
-                name={"totalFloors"}
+                name={"totalfloor"}
                 title="전체 층 수"
                 placeholder="층 수 선택"
-                data={totalFloors}
+                data={totalfloor}
                 control={control}
                 errors={errors}
               />

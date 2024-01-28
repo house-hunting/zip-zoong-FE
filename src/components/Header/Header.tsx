@@ -15,12 +15,12 @@ const nav = [
   {
     title: "원룸",
     subTitle: "전월세",
-    address: "/room/OneRoom",
+    address: "/OneRoom",
   },
   {
     title: "투룸",
     subTitle: "전월세",
-    address: "/room/TwoRoom",
+    address: "/TwoRoom",
   },
   {
     title: "내집 내놓기",

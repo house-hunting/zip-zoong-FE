@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Control, Controller, FieldErrors, UseFormGetValues } from "react-hook-form";
+import { Control, Controller, FieldErrors } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { RegiFormDatas } from "../regiSchema";
 
@@ -21,6 +21,7 @@ interface InputProps {
   label?: string;
   control: Control<RegiFormDatas>;
   errors?: FieldErrors<FormData>;
+  value?: string | number;
   // getValues?: UseFormGetValues<RegiFormDatas>;
   // disabled?: boolean | string | undefined;
   placeholder?: string;
@@ -33,11 +34,10 @@ export const InputForm: React.FC<InputProps> = ({
   // disabled,
   label,
   style,
+  value,
   errors,
   ...children
 }) => {
-  // const isDisabled = getValues("cost");
-  // console.log(disabled);
   return (
     <>
       <>
@@ -49,6 +49,7 @@ export const InputForm: React.FC<InputProps> = ({
               className={style}
               {...field}
               {...children}
+              value={value}
               // disabled={disabled}
             />
           )}

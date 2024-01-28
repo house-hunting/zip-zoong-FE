@@ -1,4 +1,4 @@
-export const totalFloors = [
+export const totalfloor = [
   {
     floor: "1층",
     value: "1",

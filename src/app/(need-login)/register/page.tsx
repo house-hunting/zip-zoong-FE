@@ -2,7 +2,7 @@
 
 import { RadioGroup } from "@/components/ui/radio-group";
 import FindAddress from "@/components/Address/Address";
-import { ChangeEvent, useEffect, useState } from "react";
+import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { RegiFormDatas, RegisterSchema } from "./_components/regiSchema";
@@ -12,25 +12,15 @@ import { InputForm } from "./_components/FormFields/inputForm";
 import { UploadFile } from "./_components/UploadFile/page";
 import { MdArrowBackIosNew } from "react-icons/md";
 import { useRouter } from "next/navigation";
+import Modal from "@/components/Modal/ConfirmModal";
 
-export type ImageDataType = {
-  url: string;
-};
-
-export type UploadImagesType = {
-  roomImage: {
-    create: ImageDataType[];
-  };
-};
+export type UploadImagesType = { url: string }[];
 
 export default function Register() {
   const [address, setAddress] = useState<string>("");
-  const [images, setImages] = useState<UploadImagesType>({
-    roomImage: {
-      create: [],
-    },
-  });
-  const [imageUrls, setImageUrls] = useState<string[]>();
+  const [images, setImages] = useState<UploadImagesType>([]);
+  const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   const {
     handleSubmit,
@@ -42,27 +32,12 @@ export default function Register() {
   } = useForm<RegiFormDatas>({ resolver: yupResolver(RegisterSchema) });
   const router = useRouter();
 
-  // const costValue = watch("cost");
-
-  // const handleRadioChange = (value: boolean) => {
-  //   setValue("cost", value); // 폼 상태를 업데이트
-
-  //   // "없음"을 선택한 경우
-  //   if (!value) {
-  //     setValue("roomCost", ""); // roomCost 값 초기화
-  //   }
-  // };
-  // const a = getValues("cost");
-  // console.log(a);
-  console.log(images);
-  // console.log("크리", typeof images.create);
-
   // ===========================================================
 
   const onSubmit = async (data: RegiFormDatas) => {
     alert(JSON.stringify(data));
     console.log(data);
-    console.log("try outside");
+
     try {
       const formData = new FormData();
       formData.append("roomType", data.roomType);
@@ -80,7 +55,7 @@ export default function Register() {
       formData.append("selectDate", data.selectDate.toString());
       formData.append("datePicker", data.datePicker.toString());
 
-      formData.append("totalFloors", data.totalFloors);
+      formData.append("totalfloor", data.totalfloor);
       formData.append("floorsNumber", data.floorsNumber);
 
       formData.append("elevator", data.elevator.toString());
@@ -88,37 +63,22 @@ export default function Register() {
       formData.append("parkingCost", data.parkingCost.toString());
       formData.append("title", data.title);
       formData.append("textArea", data.textArea);
-
-      console.log(data.roomImage);
-
-      for (let element of data.roomImage) {
-        formData.append("image", element);
-      }
-
-      for (let x of formData.entries()) {
-        console.log(x);
-      }
-
-      images.roomImage.create.forEach((image, index) => {
-        formData.append(`roomImage.create[${index}].url`, image.url);
+      uploadedFiles.forEach((file) => {
+        formData.append("roomImage", file);
       });
 
       const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/board/uploadBoard`, {
         method: "POST",
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-        body: JSON.stringify(formData),
+        body: formData,
       });
 
       if (!res.ok) {
         throw new Error("게시글 업로드에 실패하셨습니다");
       }
 
+      setShowModal(true);
       const result = await res.json();
-      console.error(result);
-
-      setImages(result);
+      console.log("result:", result);
     } catch (error) {
       console.error(error);
     }
@@ -129,6 +89,7 @@ export default function Register() {
       <form
         className="flex justify-center items-center flex-col md:p-20 mb-20"
         onSubmit={handleSubmit(onSubmit)}
+        encType="multipart/form-data"
       >
         <div className="flex w-full xs:hidden pt-16 pl-6" onClick={() => router.back()}>
           <MdArrowBackIosNew size={30} />
@@ -373,6 +334,7 @@ export default function Register() {
               errors={errors}
               setImages={setImages}
               images={images}
+              setUploadedFiles={setUploadedFiles}
               // setValue={setValue}
             />
             {/*  */}
@@ -408,6 +370,7 @@ export default function Register() {
         <button className="mt-5 bg-primary-200 text-sm xs:text-base text-white w-36 md:w-48 h-12 rounded-md font-semibold hover:bg-hover">
           매물 등록
         </button>
+        {showModal && <Modal onClose={() => setShowModal(false)}>dddd</Modal>}
       </form>
     </>
   );
